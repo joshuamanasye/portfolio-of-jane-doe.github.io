@@ -1,13 +1,6 @@
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
     overflow: hidden;
     background: #080808;
-    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
 }
 
 /* Fixed viewport container — clips the world */
@@ -25,7 +18,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 5000px;
+    width: 12000px;
     height: 100%;
     background: linear-gradient(to bottom, #05050a 0%, #090909 75%, #0d0d0d 100%);
     /* no transition — snaps instantly so character lag is visible */
@@ -41,16 +34,17 @@ body {
     border-top: 2px solid #222;
 }
 
-/* Red square character */
+/* Sprite character */
 #character {
     position: absolute;
     bottom: 70px;
     left: 40vw;
-    width: 40px;
-    height: 40px;
-    background: #cc0000;
-    box-shadow: 0 0 14px rgba(204, 0, 0, 0.35);
-    transition: left 0.2s ease-out;
+    width: 96px;
+    height: 96px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    background-repeat: no-repeat;
+    /* no CSS transition — JS lerp handles the lag */
 }
 
 /* Platforms */
@@ -87,33 +81,13 @@ body {
     letter-spacing: 0.3px;
 }
 
-/* Back button */
-#back-btn {
-    position: fixed;
-    top: 24px;
-    left: 28px;
-    color: rgba(255, 255, 255, 0.55);
-    text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    filter: blur(0.4px);
-    transition: color 0.2s, filter 0.2s;
-    z-index: 100;
-}
-
-#back-btn:hover {
-    color: #ff3300;
-    filter: blur(0px);
-}
-
 /* Scroll hint — fades on first scroll */
 #scroll-hint {
     position: fixed;
-    bottom: 90px;
+    bottom: 40px;
     right: 28px;
-    color: rgba(255, 255, 255, 0.2);
-    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1rem;
     letter-spacing: 4px;
     text-transform: uppercase;
     filter: blur(0.5px);
@@ -140,11 +114,6 @@ body {
 
 /* Mobile */
 @media (max-width: 600px) {
-    #character {
-        width: 32px;
-        height: 32px;
-    }
-
     .panel {
         width: 220px;
         padding: 18px 20px;
@@ -159,14 +128,9 @@ body {
         font-size: 12px;
     }
 
-    #back-btn {
-        font-size: 11px;
-        letter-spacing: 4px;
-    }
-
     #scroll-hint {
         font-size: 10px;
         letter-spacing: 3px;
-        bottom: 80px;
+        font-size: 0.5rem;
     }
 }

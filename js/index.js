@@ -84,7 +84,7 @@ function selectMenu(ele) {
 
     var routes = {
         'ABOUT':   'about.html',
-        'WORK':    null,
+        'WORK':    'work.html',
         'SKILLS':  null,
         'CONTACT': null,
         'RESUME':  null
@@ -110,6 +110,13 @@ function movingBackground() {
     });
 }
 
+function startBgm() {
+    menuBgm.play();
+    document.removeEventListener('click',      startBgm);
+    document.removeEventListener('keydown',    startBgm);
+    document.removeEventListener('touchstart', startBgm);
+}
+
 function openMainMenu() {
     for (var i = 0; i < MENU_COUNT; i++) {
         buttonLeave(document.getElementById("menu" + i));
@@ -120,7 +127,17 @@ function openMainMenu() {
     buttonHover(document.getElementById("menu0"));
 
     document.addEventListener('keydown', menuSelection);
-    menuBgm.play();
+
+    // play() returns a Promise; if autoplay is blocked, wait for first gesture
+    var p = menuBgm.play();
+    if (p) {
+        p.catch(function () {
+            document.addEventListener('click',      startBgm, { once: true });
+            document.addEventListener('keydown',    startBgm, { once: true });
+            document.addEventListener('touchstart', startBgm, { once: true });
+        });
+    }
+
     movingBackground();
 }
 
@@ -132,7 +149,14 @@ function closeMainMenu() {
 }
 
 function hideLoadScreen() {
+    localStorage.setItem('hasInteracted', '1');
     document.getElementById("load-screen").style.display = "none";
 }
 
 closeMainMenu();
+
+// Returning visitor — skip load screen and auto-play BGM
+if (localStorage.getItem('hasInteracted')) {
+    hideLoadScreen();
+    openMainMenu();
+}

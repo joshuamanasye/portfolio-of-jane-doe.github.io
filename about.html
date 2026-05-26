@@ -4,45 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Jane Doe</title>
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="about.css">
 </head>
 <body>
+    <div id="loader"><div id="loader-track"><div id="loader-bar"></div></div></div>
+
     <a href="index.html" id="back-btn">← menu</a>
 
     <div id="scene">
         <div id="world">
             <div id="ground"></div>
 
-            <!-- Platforms -->
-            <div class="platform" style="left: 1250px; width: 1100px; height: 130px;"></div>
-            <div class="platform" style="left: 2500px; width: 850px;  height: 200px;"></div>
-            <div class="platform" style="left: 3500px; width: 1050px; height: 100px;"></div>
+            <!-- Platforms — continuous, no gaps -->
+            <div class="platform" style="left: 1300px; width: 1300px; height: 130px;"></div>
+            <div class="platform" style="left: 2600px; width: 1100px; height: 200px;"></div>
+            <div class="platform" style="left: 3700px; width: 900px;  height: 100px;"></div>
 
             <div id="character"></div>
 
-            <!-- Panel 1 — ground level (bottom: GROUND_HEIGHT + 0 + 80) -->
-            <div class="panel" style="left: 320px; bottom: 150px;">
+            <!-- Panel 1 — ground level (bottom: 70 + 0 + 80 = 150) -->
+            <div class="panel" style="left: 650px; bottom: 150px;">
                 <h2>Jane Doe.</h2>
                 <p>No name. No record. No cause of death they could agree on.<br><br>
                 They found me in the dirt. Unmarked, undisturbed, and smiling. They should have left me there.</p>
             </div>
 
             <!-- Panel 2 — Platform A, elevation 130 (bottom: 70 + 130 + 80 = 280) -->
-            <div class="panel" style="left: 1700px; bottom: 280px;">
+            <div class="panel" style="left: 2100px; bottom: 280px;">
                 <h2>Origin</h2>
                 <p>I was buried alive with a curse sewn into my skin. Every mark on my body was put there by men who feared what they could not name.<br><br>
                 I did not die. I endured. There is a difference.</p>
             </div>
 
             <!-- Panel 3 — Platform B, elevation 200 (bottom: 70 + 200 + 80 = 350) -->
-            <div class="panel" style="left: 2800px; bottom: 350px;">
+            <div class="panel" style="left: 3100px; bottom: 350px;">
                 <h2>The Craft</h2>
                 <p>I bend what should not bend. I know the words written before language had a name. I have turned the storm, stilled the heart, and walked out of rooms that were locked from the inside.<br><br>
                 Call it a blessing.</p>
             </div>
 
             <!-- Panel 4 — Platform C, elevation 100 (bottom: 70 + 100 + 80 = 250) -->
-            <div class="panel" style="left: 3800px; bottom: 250px;">
+            <div class="panel" style="left: 4200px; bottom: 250px;">
                 <h2>Find Me.</h2>
                 <p>I have always been in the room.<br><br>
                 You just had to open the drawer.</p>

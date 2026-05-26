@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work — Jane Doe</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="work.css">
+</head>
+<body>
+    <div id="loader"><div id="loader-track"><div id="loader-bar"></div></div></div>
+
+    <a href="index.html" id="back-btn">← menu</a>
+
+    <!-- Fixed UI overlays -->
+    <div id="vignette"></div>
+    <div id="safelight"></div>
+    <div id="drag-hint">drag to explore</div>
+
+    <!-- 2D free-pan world -->
+    <div id="world">
+
+        <!-- P1 — AUTOPSY.LOG  (world centre) -->
+        <div class="polaroid" style="left: 710px; top: 529px; --rot: -2deg;">
+            <div class="polaroid-photo p-photo-1">
+                <span class="p-label">AUTOPSY.LOG</span>
+            </div>
+            <div class="polaroid-caption">
+                <p class="p-title">AUTOPSY.LOG</p>
+                <p class="p-desc">case file data visualizer</p>
+                <p class="p-tags">d3.js · node · mongo</p>
+                <a class="p-link" href="#">view →</a>
+            </div>
+        </div>
+
+        <!-- P2 — SIGIL OS  (upper-left) -->
+        <div class="polaroid" style="left: 510px; top: 379px; --rot: 1.5deg;">
+            <div class="polaroid-photo p-photo-2">
+                <span class="p-label">SIGIL OS</span>
+            </div>
+            <div class="polaroid-caption">
+                <p class="p-title">SIGIL OS</p>
+                <p class="p-desc">dark terminal ui template</p>
+                <p class="p-tags">css · webpack · js</p>
+                <a class="p-link" href="#">view →</a>
+            </div>
+        </div>
+
+        <!-- P3 — DEAD FREQ  (upper-right) -->
+        <div class="polaroid" style="left: 910px; top: 369px; --rot: -1.5deg;">
+            <div class="polaroid-photo p-photo-3">
+                <span class="p-label">DEAD FREQ</span>
+            </div>
+            <div class="polaroid-caption">
+                <p class="p-title">DEAD FREQ</p>
+                <p class="p-desc">horror audio visualizer</p>
+                <p class="p-tags">web audio api · canvas</p>
+                <a class="p-link" href="#">view →</a>
+            </div>
+        </div>
+
+        <!-- P4 — THE HOLLOW  (lower-left) -->
+        <div class="polaroid" style="left: 500px; top: 699px; --rot: 2.5deg;">
+            <div class="polaroid-photo p-photo-4">
+                <span class="p-label">THE HOLLOW</span>
+            </div>
+            <div class="polaroid-caption">
+                <p class="p-title">THE HOLLOW</p>
+                <p class="p-desc">procedural dungeon engine</p>
+                <p class="p-tags">three.js · glsl</p>
+                <a class="p-link" href="#">view →</a>
+            </div>
+        </div>
+
+        <!-- P5 — NULL GRAVE  (lower-right) -->
+        <div class="polaroid" style="left: 920px; top: 709px; --rot: -1deg;">
+            <div class="polaroid-photo p-photo-5">
+                <span class="p-label">NULL GRAVE</span>
+            </div>
+            <div class="polaroid-caption">
+                <p class="p-title">NULL GRAVE</p>
+                <p class="p-desc">memorial social network</p>
+                <p class="p-tags">react · firebase</p>
+                <a class="p-link" href="#">view →</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./js/work.js"></script>
+</body>
+</html>

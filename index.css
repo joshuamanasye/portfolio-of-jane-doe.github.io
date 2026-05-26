@@ -1,7 +1,3 @@
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
 body, html {
     margin: 0;
     height: 100%;
@@ -22,7 +18,6 @@ button {
     font-size: 30px;
     color: white;
     background-color: black;
-    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
     border: none;
     cursor: pointer;
 }
@@ -45,7 +40,6 @@ button {
     text-align: center;
     text-decoration: none;
     font-size: 20px;
-    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
     letter-spacing: 7px;
     filter: blur(0.5px);
     color: white;
@@ -73,7 +67,6 @@ button {
     text-align: center;
     text-decoration: none;
     font-size: 80px;
-    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
     letter-spacing: 10px;
     filter: blur(2.5px);
     cursor: default;
@@ -85,7 +78,6 @@ button {
     margin: 0 20px 20px;
     text-align: center;
     font-size: 14px;
-    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
     letter-spacing: 6px;
     color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;

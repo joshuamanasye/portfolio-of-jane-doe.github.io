@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane Doe - Portfolio</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="load-screen" class="load-screen" onclick="hideLoadScreen();openMainMenu();">
+        <p class="click-to-play">click to enter</p>
+    </div>
+    <div id="main-menu" class="main-menu">
+        <div class="title-div">
+            <h1 class="title">Jane Doe</h1>
+            <p class="subtitle">creative developer</p>
+        </div>
+        <nav id="game-menu" class="game-menu" aria-label="Portfolio navigation">
+            <div class="button-container">
+                <div id="menu0bg" class="menu-button-bg"></div>
+                <button id="menu0" class="menu-button" value="ABOUT" onclick="selectMenu(this)"
+                onmouseenter="changeHover(this)" ontouchstart="changeHover(this)">ABOUT</button>
+            </div>
+            <div class="button-container">
+                <div id="menu1bg" class="menu-button-bg"></div>
+                <button id="menu1" class="menu-button" value="WORK" onclick="selectMenu(this)"
+                onmouseenter="changeHover(this)" ontouchstart="changeHover(this)">WORK</button>
+            </div>
+            <div class="button-container">
+                <div id="menu2bg" class="menu-button-bg"></div>
+                <button id="menu2" class="menu-button" value="SKILLS" onclick="selectMenu(this)"
+                onmouseenter="changeHover(this)" ontouchstart="changeHover(this)">SKILLS</button>
+            </div>
+            <div class="button-container">
+                <div id="menu3bg" class="menu-button-bg"></div>
+                <button id="menu3" class="menu-button" value="CONTACT" onclick="selectMenu(this)"
+                onmouseenter="changeHover(this)" ontouchstart="changeHover(this)">CONTACT</button>
+            </div>
+            <div class="button-container">
+                <div id="menu4bg" class="menu-button-bg"></div>
+                <button id="menu4" class="menu-button" value="RESUME" onclick="selectMenu(this)"
+                onmouseenter="changeHover(this)" ontouchstart="changeHover(this)">RESUME</button>
+            </div>
+        </nav>
+    </div>
+</body>
+<script src="./js/index.js"></script>
+</html>

@@ -1,0 +1,171 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    margin: 0px;
+    padding: 12px 60px;
+    text-decoration: none;
+    font-size: 30px;
+    color: white;
+    background-color: black;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
+    border: none;
+    cursor: pointer;
+}
+
+/* Load screen */
+.load-screen {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.click-to-play {
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    user-select: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
+    letter-spacing: 7px;
+    filter: blur(0.5px);
+    color: white;
+}
+
+/* Main menu */
+.main-menu {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(./assets/background.jpg);
+    background-size: 150%;
+}
+
+.title-div {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.title {
+    margin: 20px 20px 6px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 80px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
+    letter-spacing: 10px;
+    filter: blur(2.5px);
+    cursor: default;
+    user-select: none;
+    color: white;
+}
+
+.subtitle {
+    margin: 0 20px 20px;
+    text-align: center;
+    font-size: 14px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
+    letter-spacing: 6px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    filter: blur(0.8px);
+    cursor: default;
+    user-select: none;
+}
+
+/* Nav menu */
+.game-menu {
+    padding: 0;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.button-container {
+    height: 65px;
+    width: min(500px, 88vw);
+    position: relative;
+}
+
+.menu-button,
+.menu-button-bg {
+    width: 100%;
+    height: 102%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    border: 0;
+}
+
+.menu-button {
+    color: white;
+    font-weight: 500;
+    letter-spacing: 10px;
+    background: transparent;
+    font-size: 28px;
+    padding: 12px 20px;
+    width: 100%;
+}
+
+.menu-button-bg {
+    filter: blur(2px);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .title {
+        font-size: 46px;
+        letter-spacing: 6px;
+        filter: blur(1.5px);
+    }
+
+    .subtitle {
+        font-size: 11px;
+        letter-spacing: 4px;
+    }
+
+    .button-container {
+        height: 56px;
+    }
+
+    .menu-button {
+        font-size: 20px;
+        letter-spacing: 6px;
+    }
+}
+
+@media (max-width: 380px) {
+    .title {
+        font-size: 36px;
+        letter-spacing: 4px;
+    }
+
+    .menu-button {
+        font-size: 17px;
+        letter-spacing: 4px;
+    }
+}

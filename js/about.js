@@ -66,6 +66,8 @@ function setScrollX(x) {
         hintDismissed = true;
         hint.classList.add('hidden');
     }
+
+    checkJumpscare();
 }
 
 // ── Input: mouse wheel (converts vertical to horizontal) ─────────────────────
@@ -112,6 +114,24 @@ window.addEventListener('resize', () => {
     CHAR_OFFSET = window.innerWidth * 0.4;
     setScrollX(scrollX);
 });
+
+// ── Jumpscare ─────────────────────────────────────────────────────────────────
+function jumpscare() {
+    // TODO
+}
+
+let jumpscareTimer = null;
+
+function checkJumpscare() {
+    if (scrollX >= maxScrollX) {
+        if (!jumpscareTimer) {
+            jumpscareTimer = setTimeout(jumpscare, 3000);
+        }
+    } else {
+        clearTimeout(jumpscareTimer);
+        jumpscareTimer = null;
+    }
+}
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 setScrollX(0);

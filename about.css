@@ -53,6 +53,14 @@ body {
     transition: left 0.2s ease-out;
 }
 
+/* Platforms */
+.platform {
+    position: absolute;
+    bottom: 70px; /* sits on top of ground */
+    background: #101010;
+    border-top: 2px solid #1e1e1e;
+}
+
 /* Content panels */
 .panel {
     position: absolute;

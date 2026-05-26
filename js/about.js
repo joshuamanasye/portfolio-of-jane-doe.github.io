@@ -1,6 +1,41 @@
-const WORLD_WIDTH = 5000;
+const WORLD_WIDTH  = 5000;
+const GROUND_HEIGHT = 70;    // px — must match #ground height in CSS
 let CHAR_OFFSET = window.innerWidth * 0.4;  // 40% from left, recalculated on resize
-const SCROLL_SPEED = 5;   // pixels per frame for held arrow keys
+const SCROLL_SPEED = 5;      // pixels per frame for held arrow keys
+
+// Pre-determined elevation path
+const PATH_POINTS = [
+    { x: 0,    y: 0   },  // start on ground
+    { x: 1250, y: 0   },  // approach Platform A
+    { x: 1450, y: 130 },  // land on Platform A
+    { x: 2200, y: 130 },  // cross Platform A
+    { x: 2450, y: 0   },  // drop to ground
+    { x: 2500, y: 0   },  // brief ground
+    { x: 2650, y: 200 },  // land on Platform B (big jump)
+    { x: 3200, y: 200 },  // cross Platform B
+    { x: 3450, y: 0   },  // drop to ground
+    { x: 3500, y: 0   },  // brief ground
+    { x: 3650, y: 100 },  // land on Platform C
+    { x: 4400, y: 100 },  // cross Platform C
+    { x: 4600, y: 0   },  // drop to ground
+    { x: 5000, y: 0   },  // end
+];
+
+function smoothstep(t) {
+    return t * t * (3 - 2 * t);
+}
+
+function getPathY(worldX) {
+    for (let i = 0; i < PATH_POINTS.length - 1; i++) {
+        const a = PATH_POINTS[i];
+        const b = PATH_POINTS[i + 1];
+        if (worldX >= a.x && worldX < b.x) {
+            const t = smoothstep((worldX - a.x) / (b.x - a.x));
+            return a.y + (b.y - a.y) * t;
+        }
+    }
+    return PATH_POINTS[PATH_POINTS.length - 1].y;
+}
 
 let scrollX = 0;
 let maxScrollX = WORLD_WIDTH - window.innerWidth;
@@ -15,15 +50,15 @@ let hintDismissed = false;
 function setScrollX(x) {
     scrollX = Math.max(0, Math.min(maxScrollX, x));
 
-    // World snaps instantly — so the character's transition lag is visible
+    // World snaps instantly — so the character's 0.2s left-transition lag is visible
     world.style.transform = `translateX(${-scrollX}px)`;
 
-    // Character left = world-x that keeps it at CHAR_OFFSET on screen.
-    // Because screen-x = (character.left) + (world translateX)
-    //                   = (scrollX + CHAR_OFFSET) + (-scrollX)
-    //                   = CHAR_OFFSET
-    // The 0.2s CSS transition on `left` makes the character lag behind the world.
-    character.style.left = (scrollX + CHAR_OFFSET) + 'px';
+    // left: target keeps character at CHAR_OFFSET on screen; CSS transition adds the lag
+    character.style.left   = (scrollX + CHAR_OFFSET) + 'px';
+
+    // bottom: follows the pre-determined path with no extra delay
+    const charWorldX = scrollX + CHAR_OFFSET;
+    character.style.bottom = (GROUND_HEIGHT + getPathY(charWorldX)) + 'px';
 
     progress.style.width = (scrollX / maxScrollX * 100) + '%';
 

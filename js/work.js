@@ -94,7 +94,7 @@ function updatePolaroids() {
 
         const captionT              = Math.max(0, (t - 0.5) * 2);
         caption.style.opacity       = captionT.toFixed(3);
-        caption.style.pointerEvents = captionT > 0.8 ? 'auto' : 'none';
+        caption.style.pointerEvents = captionT > 0.1 ? 'auto' : 'none';
     });
 }
 

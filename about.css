@@ -112,6 +112,95 @@ body {
     z-index: 100;
 }
 
+/* ── Doors ───────────────────────────────────────────────────────────────── */
+.door {
+    position: absolute;
+    bottom: 70px;
+    width: 64px;
+    height: 112px;
+    background: #0c0808;
+    border: 2px solid #2a1a1a;
+    border-bottom: none;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Inner door panel */
+.door::before {
+    content: '';
+    position: absolute;
+    inset: 9px;
+    border: 1px solid #1c1010;
+    pointer-events: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Door knob */
+.door-knob {
+    position: absolute;
+    right: 10px;
+    top: 56%;
+    width: 7px;
+    height: 7px;
+    background: #332020;
+    border-radius: 50%;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Label above door */
+.door-label {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    white-space: nowrap;
+    transition: color 0.3s ease;
+    pointer-events: none;
+}
+
+/* Active state — character is nearby */
+.door.door-active {
+    border-color: rgba(190, 20, 0, 0.55);
+    box-shadow: 0 0 28px rgba(190, 20, 0, 0.15),
+                inset 0 0 20px rgba(190, 20, 0, 0.05);
+}
+
+.door.door-active::before {
+    border-color: rgba(190, 20, 0, 0.25);
+}
+
+.door.door-active .door-knob {
+    background: rgba(190, 20, 0, 0.65);
+    box-shadow: 0 0 6px rgba(190, 20, 0, 0.4);
+}
+
+.door.door-active .door-label {
+    color: rgba(220, 80, 55, 0.9);
+}
+
+/* Door interaction hint */
+#door-hint {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    filter: blur(0.3px);
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 90;
+}
+
+#door-hint.hidden { opacity: 0; }
+
 /* Mobile */
 @media (max-width: 600px) {
     .panel {

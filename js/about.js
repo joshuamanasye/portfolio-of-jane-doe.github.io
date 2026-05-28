@@ -1,24 +1,25 @@
-const WORLD_WIDTH  = 6000;
+const WORLD_WIDTH  = 7500;
 const GROUND_HEIGHT = 70;    // px — must match #ground height in CSS
 let CHAR_OFFSET = window.innerWidth * 0.4;  // 40% from left, recalculated on resize
 const SCROLL_SPEED = 5;      // pixels per frame for held arrow keys
 
 // Pre-determined elevation path
+// Platforms: A = 800–1600 h130 | B = 1600–2700 h200 | C = 2700–4100 h100
 const PATH_POINTS = [
     { x: 0,    y: 0   },  // start on ground
-    { x: 1100, y: 0   },  // run toward Platform A
-    { x: 1220, y: 230 },  // jump apex (~100px above Platform A at 130)
-    { x: 1380, y: 130 },  // land on Platform A
-    { x: 2480, y: 130 },  // cross Platform A, approach jump to B
-    { x: 2590, y: 300 },  // jump apex (~100px above Platform B at 200)
-    { x: 2730, y: 200 },  // land on Platform B
-    { x: 3580, y: 200 },  // cross Platform B, approach jump to C
-    { x: 3670, y: 260 },  // jump apex (falling from B at 200 to C at 100)
-    { x: 3830, y: 100 },  // land on Platform C
-    { x: 4480, y: 100 },  // cross Platform C
-    { x: 4580, y: 160 },  // small arc off edge
-    { x: 4750, y: 0   },  // land on ground
-    { x: 6000, y: 0   },  // end
+    { x: 1100,  y: 0   },  // run toward Platform A
+    { x: 1220,  y: 230 },  // jump apex (~100px above Platform A at 130)
+    { x: 1380,  y: 130 },  // land on Platform A
+    { x: 1980, y: 130 },  // cross Platform A, approach jump to B
+    { x: 2090, y: 300 },  // jump apex (~100px above Platform B at 200)
+    { x: 2230, y: 200 },  // land on Platform B
+    { x: 3080, y: 200 },  // cross Platform B, approach jump to C
+    { x: 3170, y: 260 },  // jump apex (falling from B at 200 to C at 100)
+    { x: 3330, y: 100 },  // land on Platform C
+    { x: 3980, y: 100 },  // cross Platform C (now wider, covers Find Me panel)
+    { x: 4080, y: 160 },  // arc off edge
+    { x: 4250, y: 0   },  // land on ground
+    { x: 8000, y: 0   },  // end
 ];
 
 function smoothstep(t) {
@@ -63,8 +64,6 @@ function setScrollX(x) {
         hintDismissed = true;
         hint.classList.add('hidden');
     }
-
-    checkJumpscare();
 }
 
 // ── Touch momentum ────────────────────────────────────────────────────────────
@@ -74,7 +73,7 @@ const SCROLL_VEL_CAP  = 30;
 
 // ── Snap-to-panel (wheel + keyboard) ─────────────────────────────────────────
 // World-space X of each panel's left edge — character stops here on snap
-const SNAP_WORLD_X    = [0, 650, 2100, 3100, 3900, 6000];
+const SNAP_WORLD_X    = [0, 650, 1600, 2600, 3700, 4400, 4650, 4900, 5150];
 const SNAP_LERP       = 0.08;    // fraction of gap camera closes per frame
 let   snapTargetScrollX = null;  // null = not snapping
 
@@ -126,6 +125,38 @@ window.addEventListener('touchend', () => {
     scrollVelocity = Math.max(-SCROLL_VEL_CAP, Math.min(SCROLL_VEL_CAP, touchLastDx));
 });
 
+// ── Doors ─────────────────────────────────────────────────────────────────────
+const DOORS = [
+    { x: 4400, label: 'work',    href: 'work.html'    },
+    { x: 4650, label: 'skills',  href: 'skills.html'  },
+    { x: 4900, label: 'contact', href: 'contact.html' },
+    { x: 5150, label: 'resume',  href: 'resume.pdf'   },
+];
+const DOOR_RANGE = 80;   // world-px — within this distance, E/Space/Enter triggers
+const doorHint   = document.getElementById('door-hint');
+const doorEls    = Array.from(document.querySelectorAll('.door'));
+
+let activeDoor = null;
+
+function checkDoorProximity() {
+    const nearest = DOORS.find(d => Math.abs(charActualX - d.x) < DOOR_RANGE) ?? null;
+    if (nearest === activeDoor) return;
+    activeDoor = nearest;
+    doorEls.forEach(el => el.classList.remove('door-active'));
+    if (activeDoor) {
+        const el = doorEls.find(el => el.dataset.href === activeDoor.href);
+        if (el) el.classList.add('door-active');
+        doorHint.textContent = `[ e ]  ${activeDoor.label}`;
+        doorHint.classList.remove('hidden');
+    } else {
+        doorHint.classList.add('hidden');
+    }
+}
+
+function enterDoor() {
+    if (activeDoor) window.location.href = activeDoor.href;
+}
+
 // ── Input: keyboard → snap ────────────────────────────────────────────────────
 const keys = {};
 
@@ -133,6 +164,9 @@ window.addEventListener('keydown', (e) => {
     keys[e.code] = true;
     if (e.code === 'ArrowRight' || e.code === 'KeyD') { triggerSnap(1);  e.preventDefault(); }
     if (e.code === 'ArrowLeft'  || e.code === 'KeyA') { triggerSnap(-1); e.preventDefault(); }
+    if ((e.code === 'KeyE' || e.code === 'Space' || e.code === 'Enter') && activeDoor) {
+        enterDoor(); e.preventDefault();
+    }
 });
 
 window.addEventListener('keyup', (e) => {
@@ -169,6 +203,8 @@ function loop(ts) {
     character.style.bottom = (GROUND_HEIGHT + getPathY(charActualX) - CHAR_FOOT_OFFSET) + 'px';
 
     updateSprite(ts, targetX);
+    checkDoorProximity();
+    checkJumpscare();
     requestAnimationFrame(loop);
 }
 
@@ -184,16 +220,23 @@ window.addEventListener('resize', () => {
 });
 
 // ── Jumpscare ─────────────────────────────────────────────────────────────────
+// Fires 3 s after character walks past the "Find Me" panel (left: 4200, width: 280)
+// Fires 3 s after character walks past the "Find Me" panel (left: 3700, width: 280)
+const JUMPSCARE_TRIGGER_X = 3000;
+
 function jumpscare() {
     // TODO
+    console.log("boo");
+    
 }
 
 let jumpscareTimer = null;
 
 function checkJumpscare() {
-    if (scrollX >= maxScrollX) {
+    if (charActualX > JUMPSCARE_TRIGGER_X) {
         if (!jumpscareTimer) {
-            jumpscareTimer = setTimeout(jumpscare, 3000);
+            console.log("triggered");
+            jumpscareTimer = setTimeout(jumpscare, 2500);
         }
     } else {
         clearTimeout(jumpscareTimer);

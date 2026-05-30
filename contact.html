@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Jane Doe</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <div id="loader"><div id="loader-track"><div id="loader-bar"></div></div></div>
+
+    <a href="index.html" id="back-btn">← menu</a>
+
+    <div id="noise"></div>
+    <div id="scanlines"></div>
+    <div id="vignette"></div>
+
+    <div id="container">
+        <div id="terminal">
+            <div id="terminal-header">
+                <span class="t-dot"></span>
+                <span class="t-dot"></span>
+                <span class="t-dot"></span>
+                <span id="t-title">jane_doe :: contact</span>
+            </div>
+
+            <div id="output">
+                <div class="line sys">> initializing contact protocol...</div>
+                <div class="line sys" id="line-ready"></div>
+            </div>
+
+            <form id="contact-form" autocomplete="off">
+                <div class="field" id="field-name">
+                    <label for="inp-name"><span class="prompt">></span> your name<span class="cursor-blink">_</span></label>
+                    <input type="text" id="inp-name" name="name" spellcheck="false" maxlength="60" placeholder="type here...">
+                </div>
+                <div class="field hidden" id="field-email">
+                    <label for="inp-email"><span class="prompt">></span> your email<span class="cursor-blink">_</span></label>
+                    <input type="email" id="inp-email" name="email" spellcheck="false" maxlength="80" placeholder="type here...">
+                </div>
+                <div class="field hidden" id="field-msg">
+                    <label for="inp-msg"><span class="prompt">></span> message<span class="cursor-blink">_</span></label>
+                    <textarea id="inp-msg" name="message" spellcheck="false" maxlength="500" rows="4" placeholder="type here..."></textarea>
+                </div>
+                <div id="field-submit" class="hidden">
+                    <button type="submit" id="send-btn">[ transmit ]</button>
+                </div>
+            </form>
+
+            <div id="sent-msg" class="hidden">
+                <div class="line sys">> message received.</div>
+                <div class="line sys">> I already know where you are.</div>
+                <div class="line sys">> I will find you.</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/contact.js"></script>
+</body>
+</html>

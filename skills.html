@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills — Jane Doe</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="skills.css">
+</head>
+<body>
+    <div id="loader"><div id="loader-track"><div id="loader-bar"></div></div></div>
+
+    <a href="index.html" id="back-btn">← menu</a>
+
+    <div id="scene">
+        <div id="world">
+            <div id="ground"></div>
+
+            <!-- Platforms -->
+            <div class="platform" style="left: 1200px; width: 900px; height: 110px;"></div>
+            <div class="platform" style="left: 2100px; width: 700px; height: 180px;"></div>
+            <div class="platform" style="left: 3000px; width: 1100px; height: 80px;"></div>
+            <div class="platform" style="left: 4100px; width: 600px; height: 150px;"></div>
+
+            <div id="character"></div>
+
+            <!-- Skill category panels -->
+
+            <!-- Panel 1 — ground level -->
+            <div class="panel skill-panel" style="left: 550px; bottom: 150px;">
+                <h2>Languages</h2>
+                <div class="skill-list">
+                    <div class="skill-row"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">TypeScript</span><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">GLSL</span><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div></div>
+                </div>
+            </div>
+
+            <!-- Panel 2 — Platform A, elevation 110 -->
+            <div class="panel skill-panel" style="left: 1500px; bottom: 280px;">
+                <h2>Frameworks</h2>
+                <div class="skill-list">
+                    <div class="skill-row"><span class="skill-name">React</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">Three.js</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">Node.js</span><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">D3.js</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+                </div>
+            </div>
+
+            <!-- Panel 3 — Platform B, elevation 180 -->
+            <div class="panel skill-panel" style="left: 2400px; bottom: 350px;">
+                <h2>Tools</h2>
+                <div class="skill-list">
+                    <div class="skill-row"><span class="skill-name">Git</span><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">MongoDB</span><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">Firebase</span><div class="skill-bar"><div class="skill-fill" style="width:68%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">Webpack</span><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div></div>
+                </div>
+            </div>
+
+            <!-- Panel 4 — Platform C, elevation 80 -->
+            <div class="panel skill-panel" style="left: 3300px; bottom: 250px;">
+                <h2>Design</h2>
+                <div class="skill-list">
+                    <div class="skill-row"><span class="skill-name">Figma</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">CSS / Motion</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">Canvas API</span><div class="skill-bar"><div class="skill-fill" style="width:76%"></div></div></div>
+                    <div class="skill-row"><span class="skill-name">WebGL</span><div class="skill-bar"><div class="skill-fill" style="width:58%"></div></div></div>
+                </div>
+            </div>
+
+            <!-- Panel 5 — Platform D, elevation 150 -->
+            <div class="panel skill-panel" style="left: 4300px; bottom: 320px;">
+                <h2>Other.</h2>
+                <p style="font-size:13px; line-height:1.9; color:rgba(255,255,255,0.55); letter-spacing:0.3px; margin-top:10px;">
+                    I know how to listen to static.<br><br>
+                    I know which doors to leave open.<br><br>
+                    I've shipped things that shouldn't work.
+                </p>
+            </div>
+
+            <!-- Doors — end of corridor -->
+            <div class="door" style="left: 5450px;" data-href="about.html" onclick="window.location.href='about.html'">
+                <div class="door-knob"></div>
+                <span class="door-label">about</span>
+            </div>
+            <div class="door" style="left: 5700px;" data-href="work.html" onclick="window.location.href='work.html'">
+                <div class="door-knob"></div>
+                <span class="door-label">work</span>
+            </div>
+            <div class="door" style="left: 5950px;" data-href="contact.html" onclick="window.location.href='contact.html'">
+                <div class="door-knob"></div>
+                <span class="door-label">contact</span>
+            </div>
+            <div class="door" style="left: 6200px;" data-href="resume.pdf" onclick="window.location.href='resume.pdf'">
+                <div class="door-knob"></div>
+                <span class="door-label">resume</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="door-hint" class="hidden"></div>
+    <div id="scroll-hint">scroll or use arrow keys</div>
+    <div id="progress"></div>
+
+    <script src="./js/skills.js"></script>
+</body>
+</html>

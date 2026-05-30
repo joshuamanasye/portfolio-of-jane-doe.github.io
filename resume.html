@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume — Jane Doe</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="resume.css">
+</head>
+<body>
+    <div id="loader"><div id="loader-track"><div id="loader-bar"></div></div></div>
+
+    <a href="index.html" id="back-btn">← menu</a>
+
+    <div id="noise"></div>
+    <div id="safelight"></div>
+    <div id="vignette"></div>
+
+    <div id="container">
+
+        <!-- Left: the "document" -->
+        <div id="doc-wrapper">
+            <div id="doc-corner-tl" class="corner"></div>
+            <div id="doc-corner-tr" class="corner"></div>
+            <div id="doc">
+                <div id="doc-header">
+                    <h1 id="doc-name">Jane Doe</h1>
+                    <p id="doc-role">Creative Developer</p>
+                    <p id="doc-contact">jane@doe.com &nbsp;·&nbsp; github.com/janedoe &nbsp;·&nbsp; remote</p>
+                </div>
+
+                <div class="doc-section">
+                    <h3 class="doc-section-title">Experience</h3>
+                    <div class="doc-entry">
+                        <div class="doc-entry-meta"><span class="doc-entry-co">Void Systems Inc.</span><span class="doc-entry-date">2022 — present</span></div>
+                        <p class="doc-entry-role">Senior Frontend Engineer</p>
+                        <p class="doc-entry-desc">Built interactive data visualizations for forensic case management. Reduced load time by 60%. Introduced WebGL pipeline for real-time rendering.</p>
+                    </div>
+                    <div class="doc-entry">
+                        <div class="doc-entry-meta"><span class="doc-entry-co">Hollow Labs</span><span class="doc-entry-date">2020 — 2022</span></div>
+                        <p class="doc-entry-role">UI Engineer</p>
+                        <p class="doc-entry-desc">Designed and shipped a dark-mode terminal UI kit used by 4,000+ developers. Authored the company CSS design system from scratch.</p>
+                    </div>
+                    <div class="doc-entry">
+                        <div class="doc-entry-meta"><span class="doc-entry-co">Unmarked Digital</span><span class="doc-entry-date">2018 — 2020</span></div>
+                        <p class="doc-entry-role">Junior Developer</p>
+                        <p class="doc-entry-desc">Contributed to a procedural audio visualizer. Maintained Node/Express APIs. Wrote documentation no one read.</p>
+                    </div>
+                </div>
+
+                <div class="doc-section">
+                    <h3 class="doc-section-title">Education</h3>
+                    <div class="doc-entry">
+                        <div class="doc-entry-meta"><span class="doc-entry-co">Institute of Unseen Arts</span><span class="doc-entry-date">2014 — 2018</span></div>
+                        <p class="doc-entry-role">B.Sc. Computer Science</p>
+                        <p class="doc-entry-desc">Thesis: "Generative Grief — Procedural Mourning Machines." Graduated with distinction.</p>
+                    </div>
+                </div>
+
+                <div class="doc-section">
+                    <h3 class="doc-section-title">Skills</h3>
+                    <p class="doc-skills">JavaScript · TypeScript · Python · React · Three.js · D3.js · Node.js · GLSL · WebGL · Canvas API · MongoDB · Firebase · Figma · Git</p>
+                </div>
+
+                <div id="doc-stamp">classified</div>
+            </div>
+            <div id="doc-corner-bl" class="corner"></div>
+            <div id="doc-corner-br" class="corner"></div>
+        </div>
+
+        <!-- Right: action panel -->
+        <div id="side-panel">
+            <p id="side-label">case file<br>no. 001</p>
+            <div id="side-divider"></div>
+            <a id="download-btn" href="resume.pdf" download="jane-doe-resume.pdf">
+                <span id="dl-icon">↓</span>
+                <span>download</span>
+            </a>
+            <p id="side-note">pdf · 1 page</p>
+            <div id="side-divider2"></div>
+            <p id="side-links-label">also</p>
+            <nav id="side-links">
+                <a href="about.html">about</a>
+                <a href="work.html">work</a>
+                <a href="skills.html">skills</a>
+                <a href="contact.html">contact</a>
+            </nav>
+        </div>
+
+    </div>
+
+    <script src="./js/resume.js"></script>
+</body>
+</html>

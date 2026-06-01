@@ -30,15 +30,39 @@ function showField(id, delay) {
     }, delay);
 }
 
+/* ── Random screen flicker ────────────────────────────────────── */
+const flickerOverlay = document.getElementById('flicker-overlay');
+
+function doFlicker() {
+    if (!flickerOverlay) return;
+    flickerOverlay.classList.add('on');
+    setTimeout(() => {
+        flickerOverlay.classList.remove('on');
+        setTimeout(() => {
+            flickerOverlay.classList.add('on');
+            setTimeout(() => {
+                flickerOverlay.classList.remove('on');
+            }, 60);
+        }, 80);
+    }, 50);
+
+    // Schedule next flicker at random interval
+    const next = 8000 + Math.random() * 14000;
+    setTimeout(doFlicker, next);
+}
+
+// Start flickering after page settles
+setTimeout(doFlicker, 5000);
+
 /* ── Init sequence ────────────────────────────────────────────── */
 const lineReady = document.getElementById('line-ready');
 
 setTimeout(() => {
-    typewrite(lineReady, '> ready. speak.', 38, () => {
+    typewrite(lineReady, '> she is listening. speak.', 38, () => {
         showField('field-name', 200);
     });
     lineReady.classList.add('sys');
-}, 1100);
+}, 1800);
 
 /* ── Progressive field reveal ────────────────────────────────── */
 const nameInp  = document.getElementById('inp-name');
@@ -86,17 +110,31 @@ document.getElementById('contact-form').addEventListener('submit', e => {
     if (!name || !email || !msg) return;
 
     /* In a real build, wire to your backend / formspree / etc. */
-    /* fetch('https://formspree.io/f/YOUR_ID', { method:'POST', ... }) */
+    /* fetch('https://formspree.io/f/YOUR_ID', { method:'POST', body: JSON.stringify({name,email,msg}), headers:{'Content-Type':'application/json'} }) */
 
     document.getElementById('contact-form').classList.add('hidden');
     const sent = document.getElementById('sent-msg');
     sent.classList.remove('hidden');
 
-    /* Staggered typewriter for each reply line */
-    const lines = sent.querySelectorAll('.line');
+    /* Staggered typewriter for reply lines */
+    const lines = sent.querySelectorAll('.line.sys');
     lines.forEach((l, i) => {
         const txt = l.textContent;
         l.textContent = '';
-        setTimeout(() => typewrite(l, txt, 30), i * 600);
+        setTimeout(() => typewrite(l, txt, 30), i * 700);
     });
+
+    /* Whisper line — Jane's final word, arrives last */
+    const WHISPERS = [
+        'she was never the one who was lost.',
+        'the drawer was always open.',
+        'you opened it. now she knows where you are.',
+        'they buried her smiling. she hasn\'t stopped.',
+        'no cause of death. no next of kin. no end.',
+    ];
+    const whisperEl = document.getElementById('whisper-line');
+    const whisper   = WHISPERS[Math.floor(Math.random() * WHISPERS.length)];
+    setTimeout(() => {
+        typewrite(whisperEl, '— ' + whisper, 28);
+    }, lines.length * 700 + 600);
 });

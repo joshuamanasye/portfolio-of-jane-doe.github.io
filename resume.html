@@ -16,68 +16,135 @@
     <div id="safelight"></div>
     <div id="vignette"></div>
 
+    <!-- Grain texture overlay (subtle film grain) -->
+    <div id="grain"></div>
+
     <div id="container">
 
-        <!-- Left: the "document" -->
+        <!-- Left: the "autopsy document" -->
         <div id="doc-wrapper">
             <div id="doc-corner-tl" class="corner"></div>
             <div id="doc-corner-tr" class="corner"></div>
             <div id="doc">
+
+                <!-- Coroner header -->
+                <div id="doc-morgue-bar">
+                    <span>GREENWICH COUNTY MORGUE</span>
+                    <span id="doc-case-no">CASE NO. 001</span>
+                </div>
+
                 <div id="doc-header">
-                    <h1 id="doc-name">Jane Doe</h1>
-                    <p id="doc-role">Creative Developer</p>
-                    <p id="doc-contact">jane@doe.com &nbsp;·&nbsp; github.com/janedoe &nbsp;·&nbsp; remote</p>
+                    <div id="doc-header-left">
+                        <h1 id="doc-name">Jane Doe</h1>
+                        <p id="doc-role">Creative Developer</p>
+                        <p id="doc-contact">jane@doe.com &nbsp;·&nbsp; github.com/janedoe &nbsp;·&nbsp; remote</p>
+                    </div>
+                    <div id="doc-header-right">
+                        <p class="doc-meta-row"><span class="doc-meta-label">Date found</span><span class="doc-meta-val">—</span></p>
+                        <p class="doc-meta-row"><span class="doc-meta-label">Location</span><span class="doc-meta-val">unmarked field</span></p>
+                        <p class="doc-meta-row"><span class="doc-meta-label">Status</span><span class="doc-meta-val doc-status">unresolved</span></p>
+                    </div>
                 </div>
 
                 <div class="doc-section">
-                    <h3 class="doc-section-title">Experience</h3>
+                    <h3 class="doc-section-title">Experience &nbsp;<span class="doc-section-note">// examiner's record</span></h3>
+
                     <div class="doc-entry">
-                        <div class="doc-entry-meta"><span class="doc-entry-co">Void Systems Inc.</span><span class="doc-entry-date">2022 — present</span></div>
+                        <div class="doc-entry-meta">
+                            <span class="doc-entry-co">Void Systems Inc.</span>
+                            <span class="doc-entry-date">2022 — present</span>
+                        </div>
                         <p class="doc-entry-role">Senior Frontend Engineer</p>
-                        <p class="doc-entry-desc">Built interactive data visualizations for forensic case management. Reduced load time by 60%. Introduced WebGL pipeline for real-time rendering.</p>
+                        <p class="doc-entry-desc">Built interactive data visualizations for forensic case management. Reduced load time by 60%. Introduced WebGL pipeline for real-time rendering. Three colleagues resigned the week she was promoted. The building's power flickered each time she shipped.</p>
                     </div>
+
                     <div class="doc-entry">
-                        <div class="doc-entry-meta"><span class="doc-entry-co">Hollow Labs</span><span class="doc-entry-date">2020 — 2022</span></div>
+                        <div class="doc-entry-meta">
+                            <span class="doc-entry-co">Hollow Labs</span>
+                            <span class="doc-entry-date">2020 — 2022</span>
+                        </div>
                         <p class="doc-entry-role">UI Engineer</p>
-                        <p class="doc-entry-desc">Designed and shipped a dark-mode terminal UI kit used by 4,000+ developers. Authored the company CSS design system from scratch.</p>
+                        <p class="doc-entry-desc">Designed and shipped a dark-mode terminal UI kit used by 4,000+ developers. Authored the company CSS design system from scratch. The kit contained a function no one wrote. It has never been removed.</p>
                     </div>
+
                     <div class="doc-entry">
-                        <div class="doc-entry-meta"><span class="doc-entry-co">Unmarked Digital</span><span class="doc-entry-date">2018 — 2020</span></div>
+                        <div class="doc-entry-meta">
+                            <span class="doc-entry-co">Unmarked Digital</span>
+                            <span class="doc-entry-date">2018 — 2020</span>
+                        </div>
                         <p class="doc-entry-role">Junior Developer</p>
-                        <p class="doc-entry-desc">Contributed to a procedural audio visualizer. Maintained Node/Express APIs. Wrote documentation no one read.</p>
+                        <p class="doc-entry-desc">Contributed to a procedural audio visualizer. Maintained Node/Express APIs. Wrote documentation no one read. She left without notice. Her access badge was found in the parking lot, still warm.</p>
                     </div>
                 </div>
 
                 <div class="doc-section">
-                    <h3 class="doc-section-title">Education</h3>
+                    <h3 class="doc-section-title">Education &nbsp;<span class="doc-section-note">// records retrieved</span></h3>
                     <div class="doc-entry">
-                        <div class="doc-entry-meta"><span class="doc-entry-co">Institute of Unseen Arts</span><span class="doc-entry-date">2014 — 2018</span></div>
+                        <div class="doc-entry-meta">
+                            <span class="doc-entry-co">Institute of Unseen Arts</span>
+                            <span class="doc-entry-date">2014 — 2018</span>
+                        </div>
                         <p class="doc-entry-role">B.Sc. Computer Science</p>
-                        <p class="doc-entry-desc">Thesis: "Generative Grief — Procedural Mourning Machines." Graduated with distinction.</p>
+                        <p class="doc-entry-desc">Thesis: "Generative Grief — Procedural Mourning Machines." Graduated with distinction. The faculty never confirmed her enrollment. The building she studied in was demolished in 2019. Her diploma appeared in the chancellor's office the following morning.</p>
                     </div>
                 </div>
 
                 <div class="doc-section">
-                    <h3 class="doc-section-title">Skills</h3>
+                    <h3 class="doc-section-title">Skills &nbsp;<span class="doc-section-note">// extracted from tissue</span></h3>
                     <p class="doc-skills">JavaScript · TypeScript · Python · React · Three.js · D3.js · Node.js · GLSL · WebGL · Canvas API · MongoDB · Firebase · Figma · Git</p>
                 </div>
 
+                <div class="doc-section doc-section-redacted">
+                    <h3 class="doc-section-title">Additional Findings &nbsp;<span class="doc-section-note">// classified</span></h3>
+                    <p class="doc-redacted-block"><span class="redacted-bar"></span></p>
+                    <p class="doc-redacted-block doc-redacted-short"><span class="redacted-bar"></span></p>
+                    <p class="doc-redacted-note">Access requires Level IV clearance. Request denied.</p>
+                </div>
+
+                <!-- Rubber stamp -->
                 <div id="doc-stamp">classified</div>
+                <!-- Second stamp: cause of death unknown -->
+                <div id="doc-stamp-2">cause unknown</div>
+
             </div>
             <div id="doc-corner-bl" class="corner"></div>
             <div id="doc-corner-br" class="corner"></div>
         </div>
 
-        <!-- Right: action panel -->
+        <!-- Right: case panel -->
         <div id="side-panel">
             <p id="side-label">case file<br>no. 001</p>
             <div id="side-divider"></div>
+
+            <div id="case-details">
+                <div class="case-row">
+                    <span class="case-label">examiner</span>
+                    <span class="case-val">T. Bowman, MD</span>
+                </div>
+                <div class="case-row">
+                    <span class="case-label">date filed</span>
+                    <span class="case-val">redacted</span>
+                </div>
+                <div class="case-row">
+                    <span class="case-label">COD</span>
+                    <span class="case-val" id="cod-val">unknown</span>
+                </div>
+                <div class="case-row">
+                    <span class="case-label">next of kin</span>
+                    <span class="case-val">none on record</span>
+                </div>
+            </div>
+
+            <div id="side-divider2"></div>
+
             <a id="download-btn" href="resume.pdf" download="jane-doe-resume.pdf">
                 <span id="dl-icon">↓</span>
-                <span>download</span>
+                <span>download file</span>
             </a>
-            <p id="side-note">pdf · 1 page</p>
-            <div id="side-divider2"></div>
+            <p id="side-note">pdf · 1 page · handle with care</p>
+
+            <div id="side-divider3"></div>
+
             <p id="side-links-label">also</p>
             <nav id="side-links">
                 <a href="about.html">about</a>

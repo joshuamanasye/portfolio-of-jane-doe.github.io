@@ -44,33 +44,62 @@ const scrollHint = document.getElementById('scroll-hint');
 const progressEl = document.getElementById('progress');
 const doorHint   = document.getElementById('door-hint');
 
-/* ── Sprite sheet (2×2 walk cycle, same as about.js) ─────────── */
-const SPRITE_W  = 96;
-const SPRITE_H  = 96;
-const FRAME_DUR = 140;
-let   frame     = 0;
-let   lastFrame = 0;
-let   moving    = false;
+/* ── Sprite system (mirrors about.js) ────────────────────────── */
+const SPRITE_BASE      = './assets/Characters/Prototype_Character/Default/';
+const FRAME_SRC        = 32;
+const SPRITE_SCALE     = 3;
+const FRAME_PX         = FRAME_SRC * SPRITE_SCALE;   // 96
+const CHAR_FOOT_OFFSET = 9 * SPRITE_SCALE;            // 27
 
-function buildSpriteCSS(col, row) {
-    return `url('./assets/character.png') -${col * SPRITE_W}px -${row * SPRITE_H}px`;
-}
+const ANIMS = {
+    idle: { file: 'idle.png', cols: 2, frames: 6, fps: 8,  srcW: 64,  srcH: 96, startRow: 0 },
+    walk: { file: 'walk.png', cols: 4, frames: 4, fps: 12, srcW: 128, srcH: 96, startRow: 1 },
+};
+
+Object.values(ANIMS).forEach(a => { new Image().src = SPRITE_BASE + a.file; });
+
+let spriteAnim  = 'idle';
+let spriteFrame = 0;
+let spriteLast  = 0;
+let facingRight = true;
 
 function updateSprite(ts) {
-    if (ts - lastFrame > FRAME_DUR && moving) {
-        frame = (frame + 1) % 4;
-        lastFrame = ts;
+    const inputMove  = keys.left || keys.right;
+    const gap        = targetX - worldX;
+    const catchingUp = Math.abs(charWorldX - (worldX + window.innerWidth * CHAR_SCREEN_X)) > 2;
+    const walking    = inputMove || catchingUp;
+
+    const nextAnim = walking ? 'walk' : 'idle';
+    if (nextAnim !== spriteAnim) {
+        spriteAnim  = nextAnim;
+        spriteFrame = 0;
+        spriteLast  = ts;
     }
-    const col = moving ? frame : 0;
-    const row = facing < 0 ? 1 : 0;
-    character.style.backgroundImage = buildSpriteCSS(col, row);
-    character.style.transform = '';
+
+    const a = ANIMS[spriteAnim];
+    if (ts - spriteLast >= 1000 / a.fps) {
+        spriteFrame = (spriteFrame + 1) % a.frames;
+        spriteLast  = ts;
+    }
+
+    const col = spriteFrame % a.cols;
+    const row = a.startRow + Math.floor(spriteFrame / a.cols);
+
+    character.style.backgroundImage    = `url('${SPRITE_BASE}${a.file}')`;
+    character.style.backgroundSize     = `${a.srcW * SPRITE_SCALE}px ${a.srcH * SPRITE_SCALE}px`;
+    character.style.backgroundPosition = `-${col * FRAME_PX}px -${row * FRAME_PX}px`;
+
+    if (inputMove) {
+        if (keys.right) facingRight = true;
+        if (keys.left)  facingRight = false;
+    }
+    character.style.transform = facingRight ? 'scaleX(1)' : 'scaleX(-1)';
 }
 
 /* ── Platform collision ───────────────────────────────────────── */
 function getPlatformFloor(wx) {
     for (const p of PLATFORMS) {
-        if (wx + SPRITE_W > p.left && wx < p.left + p.width) {
+        if (wx + FRAME_PX > p.left && wx < p.left + p.width) {
             return p.height;
         }
     }
@@ -78,46 +107,46 @@ function getPlatformFloor(wx) {
 }
 
 /* ── Physics ──────────────────────────────────────────────────── */
-const GRAVITY   = 0.55;
-const JUMP_VEL  = -13;
+const GRAVITY  = 0.55;
+const JUMP_VEL = -13;
 
 function physicsStep() {
-    const floor = getPlatformFloor(charWorldX);
+    const floor        = getPlatformFloor(charWorldX);
+    const viewH        = window.innerHeight;
+    const screenBottom = viewH - GROUND_Y - floor;
 
     velY += GRAVITY;
     charY -= velY;
 
-    const viewH  = window.innerHeight;
-    const minY   = floor + GROUND_Y;
-    const screenBottom = viewH - GROUND_Y - floor;
-
     if (charY >= screenBottom) {
-        charY   = screenBottom;
-        velY    = 0;
+        charY    = screenBottom;
+        velY     = 0;
         onGround = true;
     } else {
         onGround = false;
     }
 
-    character.style.bottom = (GROUND_Y + floor + 'px');
-    if (!onGround) {
-        character.style.bottom = (viewH - charY - SPRITE_H) + 'px';
+    if (onGround) {
+        character.style.bottom = (GROUND_Y + floor) + 'px';
+    } else {
+        character.style.bottom = (viewH - charY - FRAME_PX) + 'px';
     }
 }
 
 /* ── Input ────────────────────────────────────────────────────── */
 document.addEventListener('keydown', e => {
-    if (['ArrowLeft','a','A'].includes(e.key))  { keys.left  = true; }
-    if (['ArrowRight','d','D'].includes(e.key)) { keys.right = true; }
-    if (['ArrowUp','w','W',' '].includes(e.key)) {
+    if (['ArrowLeft',  'a', 'A'].includes(e.key)) keys.left  = true;
+    if (['ArrowRight', 'd', 'D'].includes(e.key)) keys.right = true;
+    if (['ArrowUp', 'w', 'W', ' '].includes(e.key)) {
         if (onGround && !jumping) { velY = JUMP_VEL; jumping = true; }
     }
-    if (['Enter',' '].includes(e.key)) tryEnterDoor();
+    if (['Enter', ' '].includes(e.key)) tryEnterDoor();
 });
+
 document.addEventListener('keyup', e => {
-    if (['ArrowLeft','a','A'].includes(e.key))  keys.left  = false;
-    if (['ArrowRight','d','D'].includes(e.key)) keys.right = false;
-    if (['ArrowUp','w','W',' '].includes(e.key)) jumping = false;
+    if (['ArrowLeft',  'a', 'A'].includes(e.key)) keys.left  = false;
+    if (['ArrowRight', 'd', 'D'].includes(e.key)) keys.right = false;
+    if (['ArrowUp', 'w', 'W', ' '].includes(e.key)) jumping = false;
     if (onGround) jumping = false;
 });
 
@@ -142,7 +171,7 @@ window.addEventListener('touchmove', e => {
 let activeDoor = null;
 
 function checkDoors() {
-    let nearest = null;
+    let nearest     = null;
     let nearestDist = Infinity;
 
     DOORS.forEach(door => {
@@ -172,8 +201,8 @@ function tryEnterDoor() {
     }
 }
 
-/* ── Skill bar reveal ─────────────────────────────────────────── */
-const panels = document.querySelectorAll('.skill-panel');
+/* ── Skill bar reveal on approach ─────────────────────────────── */
+const panels        = document.querySelectorAll('.skill-panel');
 const revealedPanels = new Set();
 
 function checkSkillReveal() {
@@ -196,19 +225,15 @@ function checkSkillReveal() {
 
 /* ── Main loop ────────────────────────────────────────────────── */
 function loop(ts) {
-    /* movement */
-    moving = false;
-    if (keys.left)  { charWorldX = Math.max(0, charWorldX - SCROLL_SPEED); facing = -1; moving = true; }
-    if (keys.right) { charWorldX = Math.min(WORLD_WIDTH - SPRITE_W, charWorldX + SCROLL_SPEED); facing = 1; moving = true; }
+    if (keys.left)  { charWorldX = Math.max(0, charWorldX - SCROLL_SPEED); facing = -1; }
+    if (keys.right) { charWorldX = Math.min(WORLD_WIDTH - FRAME_PX, charWorldX + SCROLL_SPEED); facing = 1; }
 
-    /* auto-scroll world to keep character at CHAR_SCREEN_X */
     const desiredWorldX = charWorldX - window.innerWidth * CHAR_SCREEN_X;
     targetX = Math.max(0, Math.min(WORLD_WIDTH - window.innerWidth, desiredWorldX));
     worldX += (targetX - worldX) * LERP_FACTOR;
 
     world.style.transform = `translateX(${-worldX}px)`;
 
-    /* character screen position */
     const screenX = charWorldX - worldX;
     character.style.left = screenX + 'px';
 
@@ -217,7 +242,6 @@ function loop(ts) {
     checkDoors();
     checkSkillReveal();
 
-    /* progress bar */
     const pct = worldX / (WORLD_WIDTH - window.innerWidth) * 100;
     progressEl.style.width = pct + '%';
 

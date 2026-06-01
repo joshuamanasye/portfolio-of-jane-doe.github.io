@@ -16,31 +16,41 @@
     <div id="scanlines"></div>
     <div id="vignette"></div>
 
+    <!-- Flicker overlay that fires occasionally -->
+    <div id="flicker-overlay"></div>
+
     <div id="container">
         <div id="terminal">
+
+            <!-- Terminal titlebar -->
             <div id="terminal-header">
                 <span class="t-dot"></span>
                 <span class="t-dot"></span>
                 <span class="t-dot"></span>
-                <span id="t-title">jane_doe :: contact</span>
+                <span id="t-title">jane_doe :: contact :: signal intercepted</span>
             </div>
 
+            <!-- Output log -->
             <div id="output">
-                <div class="line sys">> initializing contact protocol...</div>
+                <div class="line sys">> GREENWICH COUNTY MORGUE — CASE 001</div>
+                <div class="line sys">> attempting to reach next of kin...</div>
+                <div class="line sys">> no records found.</div>
+                <div class="line sys">> rerouting signal to subject directly.</div>
                 <div class="line sys" id="line-ready"></div>
             </div>
 
+            <!-- Form -->
             <form id="contact-form" autocomplete="off">
                 <div class="field" id="field-name">
-                    <label for="inp-name"><span class="prompt">></span> your name<span class="cursor-blink">_</span></label>
+                    <label for="inp-name"><span class="prompt">></span> who are you<span class="cursor-blink">_</span></label>
                     <input type="text" id="inp-name" name="name" spellcheck="false" maxlength="60" placeholder="type here...">
                 </div>
                 <div class="field hidden" id="field-email">
-                    <label for="inp-email"><span class="prompt">></span> your email<span class="cursor-blink">_</span></label>
+                    <label for="inp-email"><span class="prompt">></span> where can she find you<span class="cursor-blink">_</span></label>
                     <input type="email" id="inp-email" name="email" spellcheck="false" maxlength="80" placeholder="type here...">
                 </div>
                 <div class="field hidden" id="field-msg">
-                    <label for="inp-msg"><span class="prompt">></span> message<span class="cursor-blink">_</span></label>
+                    <label for="inp-msg"><span class="prompt">></span> what do you want from her<span class="cursor-blink">_</span></label>
                     <textarea id="inp-msg" name="message" spellcheck="false" maxlength="500" rows="4" placeholder="type here..."></textarea>
                 </div>
                 <div id="field-submit" class="hidden">
@@ -48,12 +58,24 @@
                 </div>
             </form>
 
+            <!-- Sent response — Jane answers -->
             <div id="sent-msg" class="hidden">
-                <div class="line sys">> message received.</div>
-                <div class="line sys">> I already know where you are.</div>
-                <div class="line sys">> I will find you.</div>
+                <div class="line sys">> signal received.</div>
+                <div class="line sys">> she has been in the room the entire time.</div>
+                <div class="line sys">> she will find you before you find her.</div>
+                <div class="line gap"></div>
+                <div class="line whisper" id="whisper-line"></div>
             </div>
+
         </div>
+
+        <!-- Case number watermark beside terminal -->
+        <div id="case-tag">
+            <span id="case-tag-num">001</span>
+            <span id="case-tag-label">Jane Doe</span>
+            <span id="case-tag-status">OPEN</span>
+        </div>
+
     </div>
 
     <script src="./js/contact.js"></script>

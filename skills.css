@@ -49,22 +49,52 @@ body {
     border-top: 2px solid #1e1e1e;
 }
 
+/* ── Panels ─────────────────────────────────────────────────────── */
 .panel {
     position: absolute;
-    width: 300px;
-    padding: 24px 28px;
-    background: rgba(10, 10, 10, 0.92);
-    border: 1px solid rgba(55, 55, 55, 0.5);
+    width: 310px;
+    padding: 0;
+    background: rgba(8, 6, 6, 0.96);
+    border: 1px solid rgba(80, 20, 10, 0.35);
     color: white;
+    box-shadow:
+        0 0 40px rgba(150, 10, 0, 0.06),
+        inset 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* Exhibit tag — top banner */
+.panel-tag {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(180, 30, 0, 0.55);
+    border-bottom: 1px solid rgba(80, 20, 10, 0.3);
+    padding: 8px 20px;
+    background: rgba(20, 5, 5, 0.6);
 }
 
 .panel h2 {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 5px;
     text-transform: uppercase;
-    margin-bottom: 14px;
+    margin: 16px 20px 8px;
     filter: blur(0.3px);
+    color: rgba(255,255,255,0.85);
+}
+
+.panel-lore {
+    font-size: 11px;
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.35);
+    letter-spacing: 0.3px;
+    margin: 0 20px 16px;
+}
+
+.panel-lore em.highlight-red {
+    font-style: normal;
+    color: rgba(200, 40, 20, 0.75);
+    letter-spacing: 0.5px;
 }
 
 /* Skill list */
@@ -72,6 +102,10 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 0 20px 20px;
+    border-top: 1px solid rgba(50, 15, 10, 0.3);
+    padding-top: 12px;
+    margin-top: 4px;
 }
 
 .skill-row {
@@ -81,30 +115,48 @@ body {
 }
 
 .skill-name {
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.45);
-    min-width: 90px;
+    color: rgba(255, 255, 255, 0.38);
+    min-width: 86px;
 }
 
 .skill-bar {
     flex: 1;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.08);
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
     position: relative;
     overflow: hidden;
 }
 
 .skill-fill {
     height: 100%;
-    background: rgba(190, 20, 0, 0.6);
+    background: rgba(190, 20, 0, 0.55);
     width: 0;
-    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 
-.skill-fill.revealed {
-    /* width set via JS */
+/* Blood-drop glow at the fill tip */
+.skill-fill::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -2px;
+    width: 1px;
+    height: 5px;
+    background: rgba(220, 40, 0, 0.9);
+    box-shadow: 0 0 6px rgba(200, 20, 0, 0.6);
+}
+
+.skill-pct {
+    font-size: 9px;
+    font-family: monospace;
+    letter-spacing: 1px;
+    color: rgba(180, 30, 0, 0.4);
+    min-width: 22px;
+    text-align: right;
 }
 
 /* Scroll hint */
@@ -211,8 +263,8 @@ body {
 #door-hint.hidden { opacity: 0; }
 
 @media (max-width: 600px) {
-    .panel { width: 240px; padding: 18px 20px; }
-    .panel h2 { font-size: 13px; letter-spacing: 3px; }
-    .skill-name { font-size: 10px; min-width: 75px; }
+    .panel { width: 250px; }
+    .panel h2 { font-size: 12px; letter-spacing: 3px; }
+    .skill-name { font-size: 9px; min-width: 72px; }
     #scroll-hint { font-size: 0.5rem; letter-spacing: 3px; }
 }

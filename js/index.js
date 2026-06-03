@@ -98,15 +98,14 @@ function selectMenu(ele) {
 
 function movingBackground() {
     var movementStrength = 20;
-    var height = movementStrength / innerHeight;
-    var width = movementStrength / innerWidth;
+    var menuBg = document.getElementById('menu-bg');
 
     mainMenu.addEventListener('mousemove', function(e) {
-        var pageX = e.pageX - (innerWidth / 2);
+        var pageX = e.pageX - (innerWidth  / 2);
         var pageY = e.pageY - (innerHeight / 2);
-        var newvalueX = width * pageX * -1 - 25;
-        var newvalueY = height * pageY * -1 - 50;
-        mainMenu.style.backgroundPosition = newvalueX + "px " + newvalueY + "px";
+        var dx = (movementStrength / innerWidth)  * pageX * -1;
+        var dy = (movementStrength / innerHeight) * pageY * -1;
+        menuBg.style.transform = 'translate(calc(-50% + ' + dx + 'px), calc(-50% + ' + dy + 'px))';
     });
 }
 

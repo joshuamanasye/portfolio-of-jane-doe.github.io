@@ -12,171 +12,55 @@
 
     <a href="index.html" id="back-btn">← menu</a>
 
-    <div id="scene">
-        <div id="world">
-            <div id="ground"></div>
+    <!-- Atmosphere -->
+    <div id="noise"></div>
+    <div id="grain"></div>
+    <div id="vignette"></div>
 
-            <!-- Platforms -->
-            <div class="platform" style="left: 1200px; width: 900px; height: 110px;"></div>
-            <div class="platform" style="left: 2100px; width: 700px; height: 180px;"></div>
-            <div class="platform" style="left: 3000px; width: 1100px; height: 80px;"></div>
-            <div class="platform" style="left: 4100px; width: 600px; height: 150px;"></div>
-
-            <div id="character"></div>
-
-            <!-- Panel 1: Skin Markings / Languages -->
-            <div class="panel skill-panel" style="left: 550px; bottom: 150px;">
-                <div class="panel-tag">exhibit a — body markings</div>
-                <h2>Languages</h2>
-                <p class="panel-lore">Symbols carved before she had a name for them. The examiners could not agree on the instrument used.</p>
-                <div class="skill-list">
-                    <div class="skill-row">
-                        <span class="skill-name">JavaScript</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
-                        <span class="skill-pct">92</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">Python</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-                        <span class="skill-pct">85</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">TypeScript</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
-                        <span class="skill-pct">78</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">GLSL</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
-                        <span class="skill-pct">60</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Panel 2: Foreign Objects / Frameworks -->
-            <div class="panel skill-panel" style="left: 1500px; bottom: 280px;">
-                <div class="panel-tag">exhibit b — foreign objects</div>
-                <h2>Frameworks</h2>
-                <p class="panel-lore">Objects found embedded beneath the skin. No indication of force. As though they were always there.</p>
-                <div class="skill-list">
-                    <div class="skill-row">
-                        <span class="skill-name">React</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
-                        <span class="skill-pct">88</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">Three.js</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
-                        <span class="skill-pct">75</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">Node.js</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
-                        <span class="skill-pct">82</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">D3.js</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
-                        <span class="skill-pct">70</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Panel 3: Chemical Compounds / Tools -->
-            <div class="panel skill-panel" style="left: 2400px; bottom: 350px;">
-                <div class="panel-tag">exhibit c — chemical compounds</div>
-                <h2>Tools</h2>
-                <p class="panel-lore">Residues identified in the tissue. Toxicology returned results no one had seen before. Filed and sealed.</p>
-                <div class="skill-list">
-                    <div class="skill-row">
-                        <span class="skill-name">Git</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-                        <span class="skill-pct">90</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">MongoDB</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
-                        <span class="skill-pct">72</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">Firebase</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:68%"></div></div>
-                        <span class="skill-pct">68</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">Webpack</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
-                        <span class="skill-pct">65</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Panel 4: Bone Structure / Design -->
-            <div class="panel skill-panel" style="left: 3300px; bottom: 250px;">
-                <div class="panel-tag">exhibit d — bone structure</div>
-                <h2>Design</h2>
-                <p class="panel-lore">The skeleton told a different story than the flesh. Structure, proportion, an eye for what was missing.</p>
-                <div class="skill-list">
-                    <div class="skill-row">
-                        <span class="skill-name">Figma</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
-                        <span class="skill-pct">80</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">CSS / Motion</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
-                        <span class="skill-pct">88</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">Canvas API</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:76%"></div></div>
-                        <span class="skill-pct">76</span>
-                    </div>
-                    <div class="skill-row">
-                        <span class="skill-name">WebGL</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width:58%"></div></div>
-                        <span class="skill-pct">58</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Panel 5: The Unspeakable / Other -->
-            <div class="panel skill-panel" style="left: 4300px; bottom: 320px;">
-                <div class="panel-tag">exhibit e — unclassified</div>
-                <h2>Other.</h2>
-                <p class="panel-lore">
-                    The last findings were not entered into the record.<br><br>
-                    The lead examiner resigned the following morning.<br><br>
-                    His notes read only: <em class="highlight-red">she was smiling.</em>
-                </p>
-                <p class="panel-lore" style="margin-top: 16px; font-size: 11px; letter-spacing: 1.5px; color: rgba(180,20,0,0.45);">
-                    — CASE FILE NO. 001 — UNRESOLVED —
-                </p>
-            </div>
-
-            <!-- Doors — end of corridor -->
-            <div class="door" style="left: 5450px;" data-href="about.html" onclick="window.location.href='about.html'">
-                <div class="door-knob"></div>
-                <span class="door-label">about</span>
-            </div>
-            <div class="door" style="left: 5700px;" data-href="work.html" onclick="window.location.href='work.html'">
-                <div class="door-knob"></div>
-                <span class="door-label">work</span>
-            </div>
-            <div class="door" style="left: 5950px;" data-href="contact.html" onclick="window.location.href='contact.html'">
-                <div class="door-knob"></div>
-                <span class="door-label">contact</span>
-            </div>
-            <div class="door" style="left: 6200px;" data-href="resume.html" onclick="window.location.href='resume.html'">
-                <div class="door-knob"></div>
-                <span class="door-label">resume</span>
-            </div>
-        </div>
+    <!-- Case strip -->
+    <div id="case-strip">
+        <span class="cs-num">CASE 001</span>
+        <span class="cs-sep">·</span>
+        <span class="cs-name">JANE DOE</span>
+        <span class="cs-sep">·</span>
+        <span class="cs-room">examination</span>
     </div>
 
-    <div id="door-hint" class="hidden"></div>
-    <div id="scroll-hint">scroll or use arrow keys</div>
-    <div id="progress"></div>
+    <div id="exam-room">
+
+        <!-- Autopsy table + body -->
+        <div id="table">
+            <div id="body">
+                <img src="./assets/body.png" alt="autopsy subject — case 001" draggable="false">
+
+                <!-- Evidence pins (head left → feet right) -->
+                <button class="pin" data-finding="skull"  style="left:27%; top:52%;" aria-label="examine skull">1</button>
+                <button class="pin" data-finding="hands"  style="left:48%; top:63%;" aria-label="examine hands">2</button>
+                <button class="pin" data-finding="chest"  style="left:35%; top:42%;" aria-label="examine chest cavity">3</button>
+                <button class="pin" data-finding="skin"   style="left:58%; top:50%;" aria-label="examine skin markings">4</button>
+                <button class="pin" data-finding="cavity" style="left:70%; top:55%;" aria-label="examine sealed cavity">5</button>
+            </div>
+        </div>
+
+        <!-- Finding card -->
+        <div id="finding" class="hidden">
+            <button id="finding-close" aria-label="close">✕</button>
+            <div id="finding-body"></div>
+        </div>
+
+    </div>
+
+    <!-- Examine hint -->
+    <div id="examine-hint">select an evidence marker — or press 1–5</div>
+
+    <!-- Cross-reference to other case sections -->
+    <nav id="exits" aria-label="other rooms">
+        <span id="exits-label">cross-reference</span>
+        <a class="xlink" href="about.html">about</a>
+        <a class="xlink" href="work.html">work</a>
+        <a class="xlink" href="contact.html">contact</a>
+        <a class="xlink" href="resume.html">resume</a>
+    </nav>
 
     <script src="./js/skills.js"></script>
 </body>

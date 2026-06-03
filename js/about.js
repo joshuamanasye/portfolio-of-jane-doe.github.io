@@ -232,11 +232,7 @@ _jsAudio.load();
 
 function jumpscare() {
     const el = document.createElement('div');
-    el.style.cssText = 'position:fixed;inset:0;z-index:9999;overflow:hidden;';
-    const img = document.createElement('img');
-    img.src = 'assets/jane-doe.jpg';
-    img.style.cssText = 'position:absolute;inset:-5%;width:110%;height:110%;object-fit:cover;';
-    el.appendChild(img);
+    el.style.cssText = 'position:fixed;inset:0;z-index:9999;background:url("assets/jane-doe.jpg") center/cover no-repeat;';
     document.body.appendChild(el);
     _jsAudio.currentTime = 0;
     _jsAudio.play().catch(() => {});

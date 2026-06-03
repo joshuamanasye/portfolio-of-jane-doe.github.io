@@ -30,6 +30,25 @@ function showField(id, delay) {
     }, delay);
 }
 
+/* ── Jumpscare ────────────────────────────────────────────────── */
+const _jsImg   = new Image();
+_jsImg.src     = 'assets/jane-doe.jpg';
+const _jsAudio = new Audio('assets/Wilhelm Scream - Sound Effect HD.mp3');
+_jsAudio.load();
+
+function jumpscare() {
+    const el = document.createElement('div');
+    el.style.cssText = 'position:fixed;inset:0;z-index:9999;overflow:hidden;';
+    const img = document.createElement('img');
+    img.src = 'assets/jane-doe.jpg';
+    img.style.cssText = 'position:absolute;inset:-5%;width:110%;height:110%;object-fit:cover;';
+    el.appendChild(img);
+    document.body.appendChild(el);
+    _jsAudio.currentTime = 0;
+    _jsAudio.play().catch(() => {});
+    setTimeout(() => el.remove(), 200);
+}
+
 /* ── Random screen flicker ────────────────────────────────────── */
 const flickerOverlay = document.getElementById('flicker-overlay');
 
@@ -135,6 +154,6 @@ document.getElementById('contact-form').addEventListener('submit', e => {
     const whisperEl = document.getElementById('whisper-line');
     const whisper   = WHISPERS[Math.floor(Math.random() * WHISPERS.length)];
     setTimeout(() => {
-        typewrite(whisperEl, '— ' + whisper, 28);
+        typewrite(whisperEl, '— ' + whisper, 28, jumpscare);
     }, lines.length * 700 + 600);
 });

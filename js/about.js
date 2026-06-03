@@ -224,10 +224,23 @@ window.addEventListener('resize', () => {
 // Fires 3 s after character walks past the "Find Me" panel (left: 3700, width: 280)
 const JUMPSCARE_TRIGGER_X = 3000;
 
+// Preload assets so there's no delay on first trigger
+const _jsImg = new Image();
+_jsImg.src = 'assets/jane-doe.jpg';
+const _jsAudio = new Audio('assets/Wilhelm Scream - Sound Effect HD.mp3');
+_jsAudio.load();
+
 function jumpscare() {
-    // TODO
-    console.log("boo");
-    
+    const el = document.createElement('div');
+    el.style.cssText = 'position:fixed;inset:0;z-index:9999;overflow:hidden;';
+    const img = document.createElement('img');
+    img.src = 'assets/jane-doe.jpg';
+    img.style.cssText = 'position:absolute;inset:-5%;width:110%;height:110%;object-fit:cover;';
+    el.appendChild(img);
+    document.body.appendChild(el);
+    _jsAudio.currentTime = 0;
+    _jsAudio.play().catch(() => {});
+    setTimeout(() => el.remove(), 200);
 }
 
 let jumpscareTimer = null;

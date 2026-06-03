@@ -21,8 +21,9 @@
     <div id="world">
 
         <!-- P1 — AUTOPSY.LOG  (world centre) -->
-        <div class="polaroid" style="left: 710px; top: 529px; --rot: -2deg;">
+        <div class="polaroid" data-key="autopsy" style="left: 710px; top: 529px; --rot: -2deg;">
             <div class="polaroid-photo p-photo-1">
+                <img src="https://picsum.photos/seed/autopsy7/160/150" alt="" loading="lazy">
                 <span class="p-label">AUTOPSY.LOG</span>
             </div>
             <div class="polaroid-caption">
@@ -34,8 +35,9 @@
         </div>
 
         <!-- P2 — SIGIL OS  (upper-left) -->
-        <div class="polaroid" style="left: 510px; top: 379px; --rot: 1.5deg;">
+        <div class="polaroid" data-key="sigil" style="left: 510px; top: 379px; --rot: 1.5deg;">
             <div class="polaroid-photo p-photo-2">
+                <img src="https://picsum.photos/seed/sigil23/160/150" alt="" loading="lazy">
                 <span class="p-label">SIGIL OS</span>
             </div>
             <div class="polaroid-caption">
@@ -47,8 +49,9 @@
         </div>
 
         <!-- P3 — DEAD FREQ  (upper-right) -->
-        <div class="polaroid" style="left: 910px; top: 369px; --rot: -1.5deg;">
+        <div class="polaroid" data-key="deadfreq" style="left: 910px; top: 369px; --rot: -1.5deg;">
             <div class="polaroid-photo p-photo-3">
+                <img src="https://picsum.photos/seed/deadfreq9/160/150" alt="" loading="lazy">
                 <span class="p-label">DEAD FREQ</span>
             </div>
             <div class="polaroid-caption">
@@ -60,8 +63,9 @@
         </div>
 
         <!-- P4 — THE HOLLOW  (lower-left) -->
-        <div class="polaroid" style="left: 500px; top: 699px; --rot: 2.5deg;">
+        <div class="polaroid" data-key="hollow" style="left: 500px; top: 699px; --rot: 2.5deg;">
             <div class="polaroid-photo p-photo-4">
+                <img src="https://picsum.photos/seed/hollow14/160/150" alt="" loading="lazy">
                 <span class="p-label">THE HOLLOW</span>
             </div>
             <div class="polaroid-caption">
@@ -73,8 +77,9 @@
         </div>
 
         <!-- P5 — NULL GRAVE  (lower-right) -->
-        <div class="polaroid" style="left: 920px; top: 709px; --rot: -1deg;">
+        <div class="polaroid" data-key="nullgrave" style="left: 920px; top: 709px; --rot: -1deg;">
             <div class="polaroid-photo p-photo-5">
+                <img src="https://picsum.photos/seed/nullgrave5/160/150" alt="" loading="lazy">
                 <span class="p-label">NULL GRAVE</span>
             </div>
             <div class="polaroid-caption">
@@ -85,6 +90,25 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- Project modal -->
+    <div id="project-modal" class="hidden">
+        <div id="modal-backdrop"></div>
+        <div id="modal-card">
+            <button id="modal-close">✕</button>
+            <div id="modal-img-wrap">
+                <img id="modal-img" src="" alt="">
+            </div>
+            <div id="modal-content">
+                <div id="modal-header">
+                    <p id="modal-title"></p>
+                    <p id="modal-tags"></p>
+                </div>
+                <p id="modal-desc"></p>
+                <a id="modal-link" href="#" target="_blank" rel="noopener">visit project →</a>
+            </div>
+        </div>
     </div>
 
     <script src="./js/work.js"></script>

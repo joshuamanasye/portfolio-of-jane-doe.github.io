@@ -85,9 +85,9 @@ function selectMenu(ele) {
     var routes = {
         'ABOUT':   'about.html',
         'WORK':    'work.html',
-        'SKILLS':  null,
-        'CONTACT': null,
-        'RESUME':  null
+        'SKILLS':  'skills.html',
+        'CONTACT': 'contact.html',
+        'RESUME':  'resume.html'
     };
 
     var href = routes[ele.value];

@@ -1,0 +1,255 @@
+body {
+    overflow: hidden;
+    background: #04050a;
+    min-height: 100vh;
+}
+
+#noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
+}
+
+#vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 12;
+    background: radial-gradient(ellipse at center, transparent 32%, rgba(3,2,4,0.78) 100%);
+}
+
+/* Blueprint header */
+#bp-header {
+    position: fixed;
+    top: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    font-size: clamp(8px, 0.7vw, 11px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(0,160,200,0.4);
+    font-family: monospace;
+    white-space: nowrap;
+    user-select: none;
+    filter: blur(0.2px);
+}
+
+/* Map wrapper — blueprint grid background */
+#map-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image:
+        linear-gradient(rgba(0,80,140,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,80,140,0.045) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+#floor-plan {
+    width: min(94vw, 940px);
+    height: auto;
+    overflow: visible;
+}
+
+/* ── SVG element styles ───────────────────────────────────────── */
+
+/* Connectors — dashed blueprint lines */
+.connector {
+    stroke: rgba(0,100,160,0.22);
+    stroke-width: 1;
+    fill: none;
+    stroke-dasharray: 5 4;
+}
+
+/* Room rectangles */
+.room-bg {
+    fill: rgba(0,15,35,0.55);
+    stroke: rgba(0,110,170,0.32);
+    stroke-width: 1;
+    transition: fill 0.22s, stroke 0.22s;
+}
+
+.room-group {
+    cursor: pointer;
+}
+.room-group:hover .room-bg,
+.room-group:focus .room-bg {
+    fill: rgba(130,8,0,0.18);
+    stroke: rgba(190,18,0,0.72);
+}
+
+/* Visited state */
+.room-group.visited .room-bg {
+    fill: rgba(0,30,55,0.5);
+    stroke: rgba(0,140,190,0.52);
+}
+.room-group.visited:hover .room-bg {
+    fill: rgba(130,8,0,0.18);
+    stroke: rgba(190,18,0,0.72);
+}
+
+/* "You are here" room (ops) — no hover cursor */
+.room-group.here {
+    cursor: default;
+}
+.room-group.here .room-bg {
+    fill: rgba(60,0,0,0.35);
+    stroke: rgba(180,15,0,0.45);
+}
+
+/* Room label text */
+.room-label {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    fill: rgba(0,155,195,0.78);
+    text-transform: uppercase;
+    pointer-events: none;
+    user-select: none;
+}
+.room-sub {
+    font-family: monospace;
+    font-size: 6.5px;
+    letter-spacing: 1.5px;
+    fill: rgba(0,110,155,0.45);
+    text-transform: uppercase;
+    pointer-events: none;
+    user-select: none;
+}
+.room-group.visited .room-label { fill: rgba(0,175,215,0.88); }
+
+/* Visited checkmark */
+.room-stamp {
+    font-family: monospace;
+    font-size: 7px;
+    letter-spacing: 2px;
+    fill: rgba(0,180,110,0.55);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* "HERE" pulsing dot */
+.here-ring {
+    fill: none;
+    stroke: rgba(200,20,0,0.5);
+    stroke-width: 1;
+    animation: ring-pulse 1.8s ease-out infinite;
+}
+.here-dot { fill: rgba(210,30,0,0.95); }
+@keyframes ring-pulse {
+    0%   { r: 5;  opacity: 0.8; }
+    100% { r: 14; opacity: 0;   }
+}
+
+/* Room dimension annotations (flavour) */
+.room-dim {
+    font-family: monospace;
+    font-size: 5.5px;
+    letter-spacing: 1px;
+    fill: rgba(0,80,120,0.3);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* North arrow */
+#north-arrow {
+    font-family: monospace;
+    font-size: 8px;
+    fill: rgba(0,100,150,0.3);
+    letter-spacing: 1px;
+}
+
+/* Scale bar */
+#scale-bar line { stroke: rgba(0,100,150,0.3); stroke-width: 1; }
+#scale-bar text {
+    font-family: monospace;
+    font-size: 5.5px;
+    fill: rgba(0,80,120,0.3);
+    letter-spacing: 0.5px;
+}
+
+/* ── Tooltip ──────────────────────────────────────────────────── */
+#room-tip {
+    position: fixed;
+    pointer-events: none;
+    z-index: 50;
+    background: rgba(4,3,6,0.96);
+    border: 1px solid rgba(0,100,160,0.3);
+    padding: 10px 16px;
+    min-width: 160px;
+    transition: opacity 0.15s ease;
+}
+#room-tip.hidden { opacity: 0; }
+
+#tip-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(0,160,200,0.85);
+    margin-bottom: 3px;
+    font-family: monospace;
+}
+#tip-sub {
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 6px;
+    font-family: monospace;
+}
+#tip-status {
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(0,180,110,0.65);
+    font-family: monospace;
+    margin-bottom: 2px;
+}
+#tip-status.unvisited { color: rgba(180,20,0,0.55); }
+#tip-action {
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.22);
+    font-family: monospace;
+}
+
+/* ── Progress strip ───────────────────────────────────────────── */
+#progress-strip {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: monospace;
+}
+#prog-count {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(0,140,180,0.5);
+}
+#prog-status {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(180,20,0,0.45);
+}
+#prog-status.solved { color: rgba(0,180,110,0.65); }
+
+/* Mobile */
+@media (max-width: 600px) {
+    #bp-header { font-size: 7px; letter-spacing: 2px; }
+    #room-tip { padding: 8px 12px; min-width: 130px; }
+}

@@ -257,3 +257,4 @@ initPan();
 clampPan();
 applyTransform();
 updatePolaroids();
+try { localStorage.setItem('visited_work',    '1'); } catch(e) {}

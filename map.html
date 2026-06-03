@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facility Map — Jane Doe</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="map.css">
+</head>
+<body>
+    <div id="loader"><div id="loader-track"><div id="loader-bar"></div></div></div>
+
+    <a href="index.html" id="back-btn">← menu</a>
+
+    <div id="noise"></div>
+    <div id="vignette"></div>
+
+    <div id="bp-header">GREENWICH COUNTY MORGUE &nbsp;—&nbsp; FACILITY MAP &nbsp;—&nbsp; CASE NO. 001</div>
+
+    <div id="map-wrap">
+        <svg id="floor-plan" viewBox="0 0 900 460" preserveAspectRatio="xMidYMid meet"
+             xmlns="http://www.w3.org/2000/svg" aria-label="Morgue facility floor plan"></svg>
+    </div>
+
+    <div id="progress-strip">
+        <span id="prog-count">0 / 6 rooms visited</span>
+        <span id="prog-status">— case unresolved —</span>
+    </div>
+
+    <div id="room-tip" class="hidden" aria-hidden="true">
+        <p id="tip-label"></p>
+        <p id="tip-sub"></p>
+        <p id="tip-status"></p>
+        <p id="tip-action"></p>
+    </div>
+
+    <script src="./js/map.js"></script>
+</body>
+</html>

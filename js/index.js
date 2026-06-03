@@ -1,6 +1,6 @@
 var mainMenu = document.getElementById("main-menu");
 var menu = "menu0";
-var MENU_COUNT = 5;
+var MENU_COUNT = 7;
 
 var buttonAudio = new Audio("./assets/button.wav");
 var selectAudio = new Audio("./assets/switch.wav");
@@ -83,11 +83,13 @@ function selectMenu(ele) {
     selectAudio.play();
 
     var routes = {
-        'ABOUT':   'about.html',
-        'WORK':    'work.html',
-        'SKILLS':  'skills.html',
-        'CONTACT': 'contact.html',
-        'RESUME':  'resume.html'
+        'ABOUT':    'about.html',
+        'WORK':     'work.html',
+        'SKILLS':   'skills.html',
+        'CONTACT':  'contact.html',
+        'RESUME':   'resume.html',
+        'EVIDENCE': 'evidence.html',
+        'MAP':      'map.html',
     };
 
     var href = routes[ele.value];

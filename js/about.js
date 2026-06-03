@@ -130,7 +130,7 @@ const DOORS = [
     { x: 4400, label: 'work',    href: 'work.html'    },
     { x: 4650, label: 'skills',  href: 'skills.html'  },
     { x: 4900, label: 'contact', href: 'contact.html' },
-    { x: 5150, label: 'resume',  href: 'resume.pdf'   },
+    { x: 5150, label: 'resume',  href: 'resume.html'  },
 ];
 const DOOR_RANGE = 80;   // world-px — within this distance, E/Space/Enter triggers
 const doorHint   = document.getElementById('door-hint');
@@ -324,3 +324,4 @@ function updateSprite(ts, targetX) {
 // ── Init ──────────────────────────────────────────────────────────────────────
 setScrollX(0);
 requestAnimationFrame(loop);
+try { localStorage.setItem('visited_about',   '1'); } catch(e) {}

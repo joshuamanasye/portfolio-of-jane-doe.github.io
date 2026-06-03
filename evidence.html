@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Locker — Jane Doe</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="evidence.css">
+</head>
+<body>
+    <div id="loader"><div id="loader-track"><div id="loader-bar"></div></div></div>
+
+    <a href="index.html" id="back-btn">← menu</a>
+
+    <div id="noise"></div>
+    <div id="grain"></div>
+    <div id="vignette"></div>
+
+    <div id="case-strip">
+        <span class="cs-num">CASE 001</span>
+        <span class="cs-sep">·</span>
+        <span class="cs-name">JANE DOE</span>
+        <span class="cs-sep">·</span>
+        <span class="cs-room">evidence locker</span>
+    </div>
+
+    <main id="locker">
+        <div class="drawer-col">
+
+            <div class="drawer" data-key="cert">
+                <div class="drawer-face">
+                    <span class="drawer-num">EXHIBIT&nbsp;01</span>
+                    <div class="drawer-handle"></div>
+                </div>
+                <div class="drawer-content">
+                    <div class="artifact-icon">◈</div>
+                    <div class="artifact-text">
+                        <p class="art-tag">certification</p>
+                        <p class="art-title">Certified Web Developer</p>
+                        <p class="art-issuer">Coursera &nbsp;·&nbsp; Google</p>
+                        <p class="art-date">2024</p>
+                        <p class="art-lore">Found embedded in the left temporal lobe. The certificate was still warm when recovered.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer" data-key="dean">
+                <div class="drawer-face">
+                    <span class="drawer-num">EXHIBIT&nbsp;02</span>
+                    <div class="drawer-handle"></div>
+                </div>
+                <div class="drawer-content">
+                    <div class="artifact-icon">◉</div>
+                    <div class="artifact-text">
+                        <p class="art-tag">academic distinction</p>
+                        <p class="art-title">Dean's List Recognition</p>
+                        <p class="art-issuer">Institute of Unseen Arts</p>
+                        <p class="art-date">2022 — 2024</p>
+                        <p class="art-lore">Awarded three consecutive semesters. Faculty do not recall nominating her.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer" data-key="hack">
+                <div class="drawer-face">
+                    <span class="drawer-num">EXHIBIT&nbsp;03</span>
+                    <div class="drawer-handle"></div>
+                </div>
+                <div class="drawer-content">
+                    <div class="artifact-icon">◆</div>
+                    <div class="artifact-text">
+                        <p class="art-tag">competition</p>
+                        <p class="art-title">1st Place — Hackathon</p>
+                        <p class="art-issuer">Campus Dev Summit</p>
+                        <p class="art-date">2023</p>
+                        <p class="art-lore">She submitted alone. No other team member was recorded. She won by eleven points.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="drawer-col">
+
+            <div class="drawer" data-key="oss">
+                <div class="drawer-face">
+                    <span class="drawer-num">EXHIBIT&nbsp;04</span>
+                    <div class="drawer-handle"></div>
+                </div>
+                <div class="drawer-content">
+                    <div class="artifact-icon">◇</div>
+                    <div class="artifact-text">
+                        <p class="art-tag">open source</p>
+                        <p class="art-title">Open Source Contributor</p>
+                        <p class="art-issuer">GitHub Archive</p>
+                        <p class="art-date">2022 — present</p>
+                        <p class="art-lore">Repository starred 200+ times. The author field reads a different name each time you refresh.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer" data-key="uiux">
+                <div class="drawer-face">
+                    <span class="drawer-num">EXHIBIT&nbsp;05</span>
+                    <div class="drawer-handle"></div>
+                </div>
+                <div class="drawer-content">
+                    <div class="artifact-icon">○</div>
+                    <div class="artifact-text">
+                        <p class="art-tag">recognition</p>
+                        <p class="art-title">Best UI/UX Design</p>
+                        <p class="art-issuer">Internal Showcase</p>
+                        <p class="art-date">2023</p>
+                        <p class="art-lore">The panel agreed unanimously. None of them remember being there.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer drawer-sealed" data-key="sealed">
+                <div class="drawer-face">
+                    <span class="drawer-num">EXHIBIT&nbsp;06</span>
+                    <div class="drawer-handle"></div>
+                    <span class="drawer-sealed-label">SEALED</span>
+                </div>
+                <div class="drawer-content">
+                    <div class="artifact-icon" style="color:rgba(180,20,0,0.6)">▪</div>
+                    <div class="artifact-text">
+                        <p class="art-tag" style="color:rgba(180,20,0,0.55)">[redacted]</p>
+                        <p class="art-title">LEVEL IV CLEARANCE REQUIRED</p>
+                        <p class="art-issuer">—</p>
+                        <p class="art-date">—</p>
+                        <p class="art-lore" style="color:rgba(180,20,0,0.45)">Access denied. The drawer was found locked from the inside. The lock shows no signs of forced entry. There is no keyhole on this side.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <nav id="exits" aria-label="other rooms">
+        <span id="exits-label">cross-reference</span>
+        <a class="xlink" href="about.html">about</a>
+        <a class="xlink" href="work.html">work</a>
+        <a class="xlink" href="skills.html">skills</a>
+        <a class="xlink" href="resume.html">resume</a>
+        <a class="xlink" href="map.html">map</a>
+    </nav>
+
+    <script src="./js/evidence.js"></script>
+</body>
+</html>

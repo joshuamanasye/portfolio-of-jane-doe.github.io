@@ -153,3 +153,4 @@ document.getElementById('contact-form').addEventListener('submit', e => {
         typewrite(whisperEl, '— ' + whisper, 28, jumpscare);
     }, lines.length * 700 + 600);
 });
+try { localStorage.setItem('visited_contact', '1'); } catch(e) {}

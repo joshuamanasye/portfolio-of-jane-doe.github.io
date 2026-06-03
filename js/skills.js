@@ -184,3 +184,4 @@ document.addEventListener('keydown', e => {
         else openFinding(pin);
     }
 });
+try { localStorage.setItem('visited_skills',  '1'); } catch(e) {}

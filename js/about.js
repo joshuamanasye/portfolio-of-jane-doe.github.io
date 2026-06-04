@@ -324,4 +324,4 @@ function updateSprite(ts, targetX) {
 // ── Init ──────────────────────────────────────────────────────────────────────
 setScrollX(0);
 requestAnimationFrame(loop);
-try { localStorage.setItem('visited_about',   '1'); } catch(e) {}
+try { localStorage.setItem('visited_about',   '1'); localStorage.setItem('last_room', 'corridor'); } catch(e) {}

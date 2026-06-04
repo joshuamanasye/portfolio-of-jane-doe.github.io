@@ -21,8 +21,17 @@ const ROOMS = [
     { id:'intake',   label:'INTAKE',          sub:'communicate',     href:'contact.html',  flag:'visited_contact',  x:455, y:325, w:155, h:100 },
     { id:'records',  label:'RECORDS',         sub:'case file',       href:'resume.html',   flag:'visited_resume',   x:670, y:105, w:150, h:90  },
     { id:'evidence', label:'EVIDENCE LOCKER', sub:'artifacts',       href:'evidence.html', flag:'visited_evidence', x:670, y:240, w:150, h:90  },
-    { id:'ops',      label:'OPERATIONS',      sub:'you are here',    href:null,            flag:null,               x:670, y:372, w:150, h:75  },
+    { id:'ops',      label:'OPERATIONS',      sub:'restricted',      href:null,            flag:null,               x:670, y:372, w:150, h:75  },
 ];
+
+/* Which room is the visitor currently "in" — the last content page they
+   opened before coming to the map. Falls back to the lobby. */
+const VALID_IDS = new Set(ROOMS.map(r => r.id));
+let currentRoomId = 'lobby';
+try {
+    const lr = localStorage.getItem('last_room');
+    if (lr && VALID_IDS.has(lr)) currentRoomId = lr;
+} catch (e) {}
 
 /* Centers (x + w/2, y + h/2) */
 function cx(r) { return r.x + r.w / 2; }
@@ -71,13 +80,13 @@ const gRooms = el('g', { id:'rooms' });
 
 ROOMS.forEach(room => {
     const visited  = isVisited(room);
-    const isHere   = room.id === 'ops';
+    const isHere   = room.id === currentRoomId;
     const isLobby  = room.id === 'lobby';
 
     const g = el('g', {
         class: ['room-group', visited ? 'visited' : '', isHere ? 'here' : ''].filter(Boolean).join(' '),
         'data-id': room.id,
-        ...(room.href && !isHere ? { tabindex:'0', role:'link', 'aria-label': room.label } : {}),
+        ...(room.href ? { tabindex:'0', role:'link', 'aria-label': room.label } : {}),
     });
 
     /* Background rect */
@@ -98,13 +107,16 @@ ROOMS.forEach(room => {
         g.appendChild(txt('text', { class:'room-stamp', x: room.x + room.w - 4, y: room.y + 10, 'text-anchor':'end' }, '✓ VISITED'));
     }
 
-    /* "You are here" indicator */
+    /* "You are here" indicator — pulsing ring (CSS scale anim) at the
+       room's top-left corner, plus a label above the room. Dynamic: lands
+       on whichever room maps to the last page the visitor opened. */
     if (isHere) {
-        const dot = el('circle', { class:'here-dot', cx: cx(room), cy: room.y + room.h - 14, r:'4' });
-        const ring = el('circle', { class:'here-ring', cx: cx(room), cy: room.y + room.h - 14, r:'5' });
+        const hx = room.x + 14, hy = room.y + 15;
+        const ring = el('circle', { class:'here-ring', cx: hx, cy: hy, r:'5' });
+        const dot  = el('circle', { class:'here-dot',  cx: hx, cy: hy, r:'4' });
         g.appendChild(ring);
         g.appendChild(dot);
-        g.appendChild(txt('text', { class:'room-sub', x: cx(room), y: room.y + room.h - 4, 'text-anchor':'middle' }, '▸ YOU ARE HERE'));
+        g.appendChild(txt('text', { class:'here-label', x: cx(room), y: room.y - 6, 'text-anchor':'middle' }, '▸ YOU ARE HERE'));
     }
 
     /* Lobby special label */
@@ -141,13 +153,17 @@ function showTip(room) {
     const visited = isVisited(room);
     tipLbl.textContent = room.label;
     tipSub.textContent = `// ${room.sub}`;
-    if (room.id === 'ops') {
-        tipSts.textContent = '▸ current location';
+    if (room.id === currentRoomId) {
+        tipSts.textContent = '▸ you are here';
         tipSts.className = '';
-        tipAct.textContent = '';
-    } else {
+        tipAct.textContent = room.href ? '— click to re-enter —' : '';
+    } else if (room.flag) {
         tipSts.textContent = visited ? '✓ visited' : '○ unvisited';
         tipSts.className   = visited ? '' : 'unvisited';
+        tipAct.textContent = room.href ? '— click to enter —' : '';
+    } else {
+        tipSts.textContent = room.href ? '▸ accessible' : '▪ restricted';
+        tipSts.className   = '';
         tipAct.textContent = room.href ? '— click to enter —' : '';
     }
     tip.classList.remove('hidden');
@@ -187,9 +203,18 @@ function updateProgress() {
     const n = TRACKABLE.filter(r => isVisited(r)).length;
     progCount.textContent = `${n} / ${TRACKABLE.length} rooms visited`;
     if (n >= TRACKABLE.length) {
-        progSts.textContent = '— case resolved —';
-        progSts.classList.add('solved');
+        progSts.textContent = '— she does not rest —';
     }
 }
 
 updateProgress();
+
+/* ── Clear progress button ────────────────────────────────────── */
+document.getElementById('clear-btn').addEventListener('click', () => {
+    [
+        'visited_about','visited_work','visited_skills',
+        'visited_contact','visited_resume','visited_evidence',
+        'visited_map','examined_skills','last_room',
+    ].forEach(k => { try { localStorage.removeItem(k); } catch(e) {} });
+    location.reload();
+});

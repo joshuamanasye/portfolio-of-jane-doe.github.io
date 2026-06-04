@@ -254,19 +254,19 @@ body {
     gap: clamp(12px, 1.6vw, 24px);
 }
 #exits-label {
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(190,35,0,0.55);
+    color: rgba(230,70,35,0.9);
     margin-right: 4px;
     user-select: none;
     font-family: inherit;
 }
 .xlink {
-    font-size: 10px;
+    font-size: 13px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.78);
     text-decoration: none;
     transition: color 0.2s;
 }

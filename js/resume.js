@@ -73,4 +73,4 @@ function cycleCOD() {
 setTimeout(() => {
     codTimer = setInterval(cycleCOD, 2200);
 }, 3000);
-try { localStorage.setItem('visited_resume',  '1'); } catch(e) {}
+try { localStorage.setItem('visited_resume',  '1'); localStorage.setItem('last_room', 'records'); } catch(e) {}

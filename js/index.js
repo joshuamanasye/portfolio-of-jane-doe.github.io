@@ -1,6 +1,9 @@
 var mainMenu = document.getElementById("main-menu");
 var menu = "menu0";
-var MENU_COUNT = 7;
+var MENU_COUNT = 6;
+
+/* Back at the menu — current location resets to the lobby on the map */
+try { localStorage.setItem('last_room', 'lobby'); } catch (e) {}
 
 var buttonAudio = new Audio("./assets/button.wav");
 var selectAudio = new Audio("./assets/switch.wav");
@@ -89,7 +92,6 @@ function selectMenu(ele) {
         'CONTACT':  'contact.html',
         'RESUME':   'resume.html',
         'EVIDENCE': 'evidence.html',
-        'MAP':      'map.html',
     };
 
     var href = routes[ele.value];

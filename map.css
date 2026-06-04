@@ -29,10 +29,10 @@ body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 30;
-    font-size: clamp(8px, 0.7vw, 11px);
+    font-size: clamp(11px, 1vw, 15px);
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: rgba(0,160,200,0.4);
+    color: rgba(40,190,225,0.72);
     font-family: monospace;
     white-space: nowrap;
     user-select: none;
@@ -63,17 +63,17 @@ body {
 
 /* Connectors — dashed blueprint lines */
 .connector {
-    stroke: rgba(0,100,160,0.22);
-    stroke-width: 1;
+    stroke: rgba(30,140,195,0.4);
+    stroke-width: 1.2;
     fill: none;
     stroke-dasharray: 5 4;
 }
 
 /* Room rectangles */
 .room-bg {
-    fill: rgba(0,15,35,0.55);
-    stroke: rgba(0,110,170,0.32);
-    stroke-width: 1;
+    fill: rgba(0,18,40,0.6);
+    stroke: rgba(40,150,205,0.55);
+    stroke-width: 1.2;
     transition: fill 0.22s, stroke 0.22s;
 }
 
@@ -96,65 +96,78 @@ body {
     stroke: rgba(190,18,0,0.72);
 }
 
-/* "You are here" room (ops) — no hover cursor */
-.room-group.here {
-    cursor: default;
-}
+/* "You are here" room — red-tinted, highlighted */
 .room-group.here .room-bg {
-    fill: rgba(60,0,0,0.35);
-    stroke: rgba(180,15,0,0.45);
+    fill: rgba(70,2,0,0.42);
+    stroke: rgba(220,30,5,0.7);
+    stroke-width: 1.6;
+}
+.room-group.here .room-label { fill: rgba(255,120,95,0.95); }
+
+/* "You are here" caption above the room */
+.here-label {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    fill: rgba(240,60,25,0.95);
+    text-transform: uppercase;
+    pointer-events: none;
+    user-select: none;
 }
 
 /* Room label text */
 .room-label {
     font-family: monospace;
-    font-size: 9px;
+    font-size: 12px;
     letter-spacing: 2.5px;
-    fill: rgba(0,155,195,0.78);
+    fill: rgba(70,205,240,0.95);
     text-transform: uppercase;
     pointer-events: none;
     user-select: none;
 }
 .room-sub {
     font-family: monospace;
-    font-size: 6.5px;
+    font-size: 8.5px;
     letter-spacing: 1.5px;
-    fill: rgba(0,110,155,0.45);
+    fill: rgba(40,165,205,0.72);
     text-transform: uppercase;
     pointer-events: none;
     user-select: none;
 }
-.room-group.visited .room-label { fill: rgba(0,175,215,0.88); }
+.room-group.visited .room-label { fill: rgba(90,215,250,1); }
 
 /* Visited checkmark */
 .room-stamp {
     font-family: monospace;
-    font-size: 7px;
+    font-size: 8.5px;
     letter-spacing: 2px;
-    fill: rgba(0,180,110,0.55);
+    fill: rgba(40,210,140,0.85);
     pointer-events: none;
     user-select: none;
 }
 
-/* "HERE" pulsing dot */
+/* "HERE" pulsing dot — CSS transform scale (reliable across browsers).
+   transform-box: fill-box pins the origin to the circle's own centre. */
 .here-ring {
     fill: none;
-    stroke: rgba(200,20,0,0.5);
-    stroke-width: 1;
+    stroke: rgba(220,35,10,0.75);
+    stroke-width: 1.4;
+    transform-box: fill-box;
+    transform-origin: center;
     animation: ring-pulse 1.8s ease-out infinite;
 }
-.here-dot { fill: rgba(210,30,0,0.95); }
+.here-dot { fill: rgba(235,45,15,1); }
 @keyframes ring-pulse {
-    0%   { r: 5;  opacity: 0.8; }
-    100% { r: 14; opacity: 0;   }
+    0%   { transform: scale(1);   opacity: 0.85; }
+    100% { transform: scale(3.4); opacity: 0;    }
 }
 
 /* Room dimension annotations (flavour) */
 .room-dim {
     font-family: monospace;
-    font-size: 5.5px;
+    font-size: 6.5px;
     letter-spacing: 1px;
-    fill: rgba(0,80,120,0.3);
+    fill: rgba(40,130,170,0.5);
     pointer-events: none;
     user-select: none;
 }
@@ -190,35 +203,35 @@ body {
 #room-tip.hidden { opacity: 0; }
 
 #tip-label {
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(0,160,200,0.85);
+    color: rgba(50,185,225,0.95);
     margin-bottom: 3px;
     font-family: monospace;
 }
 #tip-sub {
-    font-size: 8px;
+    font-size: 9.5px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.5);
     margin-bottom: 6px;
     font-family: monospace;
 }
 #tip-status {
-    font-size: 8px;
+    font-size: 9.5px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(0,180,110,0.65);
+    color: rgba(40,205,135,0.85);
     font-family: monospace;
     margin-bottom: 2px;
 }
-#tip-status.unvisited { color: rgba(180,20,0,0.55); }
+#tip-status.unvisited { color: rgba(215,45,15,0.8); }
 #tip-action {
-    font-size: 8px;
+    font-size: 9.5px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.22);
+    color: rgba(255,255,255,0.4);
     font-family: monospace;
 }
 
@@ -235,18 +248,33 @@ body {
     font-family: monospace;
 }
 #prog-count {
-    font-size: 9px;
+    font-size: 12px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(0,140,180,0.5);
+    color: rgba(50,180,220,0.85);
 }
 #prog-status {
-    font-size: 9px;
+    font-size: 12px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(180,20,0,0.45);
+    color: rgba(210,45,15,0.8);
 }
-#prog-status.solved { color: rgba(0,180,110,0.65); }
+#clear-btn {
+    background: none;
+    border: 1px solid rgba(200,35,10,0.55);
+    color: rgba(220,60,25,0.9);
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+#clear-btn:hover {
+    border-color: rgba(200,30,0,0.7);
+    color: rgba(220,50,20,0.9);
+}
 
 /* Mobile */
 @media (max-width: 600px) {

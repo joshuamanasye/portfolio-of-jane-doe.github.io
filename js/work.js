@@ -257,4 +257,4 @@ initPan();
 clampPan();
 applyTransform();
 updatePolaroids();
-try { localStorage.setItem('visited_work',    '1'); } catch(e) {}
+try { localStorage.setItem('visited_work',    '1'); localStorage.setItem('last_room', 'darkroom'); } catch(e) {}

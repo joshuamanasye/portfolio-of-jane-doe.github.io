@@ -10,14 +10,13 @@ body, button, input, select, textarea {
     font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
 }
 
-/* ── Back button — used by all sub-pages ─────────────────────── */
-#back-btn {
+/* ── Top-left nav — back + map buttons ──────────────────────── */
+#back-btn,
+#map-btn {
     position: fixed;
     top: 24px;
-    left: 28px;
     color: rgba(255, 255, 255, 0.45);
     text-decoration: none;
-    font-size: 2rem;
     letter-spacing: 5px;
     text-transform: uppercase;
     filter: blur(0.4px);
@@ -26,16 +25,27 @@ body, button, input, select, textarea {
     cursor: pointer;
 }
 
-#back-btn:hover {
+#back-btn:hover,
+#map-btn:hover {
     color: #ff3300;
     filter: blur(0px);
 }
 
+/* ── Back button — used by all sub-pages ─────────────────────── */
+#back-btn {
+    left: 28px;
+    font-size: 2rem;
+}
+
+#map-btn {
+    left: 205px;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.35);
+}
+
 @media (max-width: 600px) {
-    #back-btn {
-        font-size: 1.5rem;
-        letter-spacing: 4px;
-    }
+    #back-btn { font-size: 1.5rem; letter-spacing: 4px; }
+    #map-btn  { left: 162px; font-size: 0.9rem; }
 }
 
 /* ── Loading screen — shared by about + work ─────────────────── */

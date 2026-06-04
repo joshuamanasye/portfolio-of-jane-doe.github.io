@@ -10,7 +10,7 @@
 }());
 
 /* Mark visited */
-try { localStorage.setItem('visited_evidence', '1'); } catch (e) {}
+try { localStorage.setItem('visited_evidence', '1'); localStorage.setItem('last_room', 'evidence'); } catch (e) {}
 
 /* ── Drawer interaction ───────────────────────────────────────── */
 const drawers = Array.from(document.querySelectorAll('.drawer'));

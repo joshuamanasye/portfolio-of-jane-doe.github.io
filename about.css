@@ -38,7 +38,7 @@ body {
 #character {
     position: absolute;
     bottom: 70px;
-    left: 40vw;
+    left: 0;
     width: 96px;
     height: 96px;
     image-rendering: pixelated;

@@ -3,22 +3,65 @@ const GROUND_HEIGHT = 70;    // px — must match #ground height in CSS
 let CHAR_OFFSET = window.innerWidth * 0.4;  // 40% from left, recalculated on resize
 const SCROLL_SPEED = 5;      // pixels per frame for held arrow keys
 
+// ── Sprite animation ──────────────────────────────────────────────────────────
+const SPRITE_BASE      = './assets/Characters/Prototype_Character/Default/';
+const FRAME_SRC        = 32;   // source px per frame (all sheets 32×32)
+const SPRITE_SCALE     = 3;    // display scale → 96×96 per frame (×1.5 of ×2)
+const FRAME_PX         = FRAME_SRC * SPRITE_SCALE;          // 96
+const CHAR_FOOT_OFFSET = 9    * SPRITE_SCALE;               // 27 — transparent px below feet × scale
+
+const ANIMS = {
+    idle: { file: 'idle.png', cols: 2, frames: 6, fps: 8,  srcW: 64,  srcH: 96, startRow: 0 },
+    walk: { file: 'walk.png', cols: 4, frames: 4, fps: 12, srcW: 128, srcH: 96, startRow: 1 },
+};
+
 // Pre-determined elevation path
 // Platforms: A = 800–1600 h130 | B = 1600–2700 h200 | C = 2700–4100 h100
+
+// OLD PATH_POINTS
+// const PATH_POINTS = [
+//     { x: 0,    y: 0   },  // start on ground
+//     { x: 1100,  y: 0   },  // run toward Platform A
+//     { x: 1220,  y: 230 },  // jump apex (~100px above Platform A at 130)
+//     { x: 1380,  y: 130 },  // land on Platform A
+//     { x: 1980, y: 130 },  // cross Platform A, approach jump to B
+//     { x: 2090, y: 300 },  // jump apex (~100px above Platform B at 200)
+//     { x: 2230, y: 200 },  // land on Platform B
+//     { x: 3080, y: 200 },  // cross Platform B, approach jump to C
+//     { x: 3170, y: 260 },  // jump apex (falling from B at 200 to C at 100)
+//     { x: 3330, y: 100 },  // land on Platform C
+//     { x: 3980, y: 100 },  // cross Platform C (now wider, covers Find Me panel)
+//     { x: 4080, y: 160 },  // arc off edge
+//     { x: 4250, y: 0   },  // land on ground
+//     { x: 8000, y: 0   },  // end
+// ];
+
 const PATH_POINTS = [
     { x: 0,    y: 0   },  // start on ground
-    { x: 1100,  y: 0   },  // run toward Platform A
-    { x: 1220,  y: 230 },  // jump apex (~100px above Platform A at 130)
-    { x: 1380,  y: 130 },  // land on Platform A
-    { x: 1980, y: 130 },  // cross Platform A, approach jump to B
-    { x: 2090, y: 300 },  // jump apex (~100px above Platform B at 200)
-    { x: 2230, y: 200 },  // land on Platform B
-    { x: 3080, y: 200 },  // cross Platform B, approach jump to C
-    { x: 3170, y: 260 },  // jump apex (falling from B at 200 to C at 100)
-    { x: 3330, y: 100 },  // land on Platform C
-    { x: 3980, y: 100 },  // cross Platform C (now wider, covers Find Me panel)
-    { x: 4080, y: 160 },  // arc off edge
-    { x: 4250, y: 0   },  // land on ground
+    { x: 1000,  y: 0   },  // run toward Platform A (dimajukan agar lompatan dimulai lebih awal)
+    
+    // === LOMPATAN KE PLATFORM A (Diperlebar dari 1100-1380 menjadi 1000-1450) ===
+    { x: 1225,  y: 230 },  // apex lompatan A
+    { x: 1450,  y: 130 },  // mendarat di Platform A
+    
+    { x: 1850, y: 130 },  // bersiap lompat ke B
+    
+    // === LOMPATAN KE PLATFORM B (Diperlebar dari 1980-2230 menjadi 1850-2350) ===
+    { x: 2100, y: 300 },  // apex lompatan B
+    { x: 2350, y: 200 },  // mendarat di Platform B
+    
+    { x: 2950, y: 200 },  // bersiap lompat ke C
+    
+    // === LOMPATAN KE PLATFORM C (Diperlebar dari 3080-3330 menjadi 2950-3450) ===
+    { x: 3200, y: 260 },  // apex lompatan C
+    { x: 3450, y: 100 },  // mendarat di Platform C
+    
+    { x: 3950, y: 100 },  // bersiap turun ke tanah
+    
+    // === LOMPATAN TURUN KE TANAH (Diperlebar dari 3980-4250 menjadi 3950-4350) ===
+    { x: 4150, y: 160 },  // arc off edge
+    { x: 4350, y: 0   },  // land on ground
+    
     { x: 8000, y: 0   },  // end
 ];
 
@@ -42,8 +85,8 @@ let scrollX    = 0;
 let maxScrollX = WORLD_WIDTH - window.innerWidth;
 
 // Character follow — world moves instantly, character lerps toward target
-const CHAR_FOLLOW     = 0.03;   // fraction of gap closed per frame (~0.5 s to catch up)
-const CHAR_MAX_SPEED  = 3;    // px per frame — caps how fast character can move
+const CHAR_FOLLOW     = 0.12;   // fraction of gap closed per frame (~0.5 s to catch up)
+const CHAR_MAX_SPEED  = 80;    // px per frame — caps how fast character can move
 let charActualX   = CHAR_OFFSET;  // world-space X; starts at same position as target
 
 const world     = document.getElementById('world');
@@ -74,7 +117,7 @@ const SCROLL_VEL_CAP  = 30;
 // ── Snap-to-panel (wheel + keyboard) ─────────────────────────────────────────
 // World-space X of each panel's left edge — character stops here on snap
 const SNAP_WORLD_X    = [0, 650, 1600, 2600, 3700, 4400, 4650, 4900, 5150];
-const SNAP_LERP       = 0.08;    // fraction of gap camera closes per frame
+const SNAP_LERP       = 0.06    ;    // fraction of gap camera closes per frame
 let   snapTargetScrollX = null;  // null = not snapping
 
 let   wheelAccum      = 0;
@@ -252,18 +295,6 @@ function checkJumpscare() {
         jumpscareTimer = null;
     }
 }
-
-// ── Sprite animation ──────────────────────────────────────────────────────────
-const SPRITE_BASE      = './assets/Characters/Prototype_Character/Default/';
-const FRAME_SRC        = 32;   // source px per frame (all sheets 32×32)
-const SPRITE_SCALE     = 3;    // display scale → 96×96 per frame (×1.5 of ×2)
-const FRAME_PX         = FRAME_SRC * SPRITE_SCALE;          // 96
-const CHAR_FOOT_OFFSET = 9    * SPRITE_SCALE;               // 27 — transparent px below feet × scale
-
-const ANIMS = {
-    idle: { file: 'idle.png', cols: 2, frames: 6, fps: 8,  srcW: 64,  srcH: 96, startRow: 0 },
-    walk: { file: 'walk.png', cols: 4, frames: 4, fps: 12, srcW: 128, srcH: 96, startRow: 1 },
-};
 
 // Preload both sheets so there's no flicker on first switch
 Object.values(ANIMS).forEach(a => { new Image().src = SPRITE_BASE + a.file; });
